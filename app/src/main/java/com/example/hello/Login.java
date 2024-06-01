@@ -13,27 +13,20 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONArray;
-
-import java.util.ArrayList;
-
-public class Main extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     private RequestQueue queue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         final EditText username = findViewById(R.id.usernameText);
         final EditText password = findViewById(R.id.passwordText);
@@ -42,7 +35,7 @@ public class Main extends AppCompatActivity {
         textViewSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main.this, RegisterActivity.class);
+                Intent intent = new Intent(Login.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -78,10 +71,10 @@ public class Main extends AppCompatActivity {
                             Log.d("Error", exception.toString());
                         }
                         if(check.equals("yes")){
-                            Intent intent = new Intent(Main.this, MainMenu.class);
+                            Intent intent = new Intent(Login.this, Menu.class);
                             startActivity(intent);
                         }else{
-                            Toast.makeText(Main.this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
                         }
                     }
                 }, new Response.ErrorListener() {
