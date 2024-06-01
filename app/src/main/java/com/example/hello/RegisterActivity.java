@@ -12,23 +12,15 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONArray;
-
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity{
         textViewLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, Main.class);
+                Intent intent = new Intent(RegisterActivity.this, Login.class);
                 startActivity(intent);
             }
         });
@@ -102,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity{
                 if(str.equals("error")){
                     Toast.makeText(RegisterActivity.this, "Username or email is already in use", Toast.LENGTH_LONG).show();
                 }else{
-                    Intent intent = new Intent(RegisterActivity.this, Main.class);
+                    Intent intent = new Intent(RegisterActivity.this, Login.class);
                     startActivity(intent);
                 }
             }
