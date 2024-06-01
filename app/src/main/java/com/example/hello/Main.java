@@ -46,7 +46,7 @@ public class Main extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+//nice
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
