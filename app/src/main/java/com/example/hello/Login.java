@@ -39,7 +39,7 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//niceasdasdasdasasd
+
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +50,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-    }
+    }//e
 
     private void canLogin(String username, String pass) {
         String url = "http://10.0.2.2/android/canLoggin.php?username=" + username + "&pass=" + pass;
