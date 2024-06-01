@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         final EditText username = findViewById(R.id.usernameText);
         final EditText password = findViewById(R.id.passwordText);
@@ -39,7 +39,7 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//nice
+
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +50,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-    }
+    }//e
 
     private void canLogin(String username, String pass) {
         String url = "http://10.0.2.2/android/canLoggin.php?username=" + username + "&pass=" + pass;
