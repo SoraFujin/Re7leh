@@ -7,6 +7,17 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <!--    Items for the dropdown menu array-->
+    <string-array name="options_array">
+        <item>Home</item>
+        <item>Tour</item>
+        <item>Hotels</item>
+        <item>Plan Trip</item>
+        <item>Invite Friends</item>
+        <item>Schedule Reminders</item>
+        <item>Sign Out</item>
+    </string-array>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
