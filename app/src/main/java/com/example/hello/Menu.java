@@ -32,8 +32,7 @@ public class Menu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-        setContentView(R.layout.activity_main);
+
 
         recycler = findViewById(R.id.main_menu);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -113,9 +112,5 @@ public class Menu extends AppCompatActivity {
         Volley.newRequestQueue(Menu.this).add(stringRequest);
 
     }
-=======
-        setContentView(R.layout.activity_login);
-    }//edit asdfhaskjod
->>>>>>> 7ff1b0d564730cac7fbc0bf28f6f3897f23a32f4
 
 }
