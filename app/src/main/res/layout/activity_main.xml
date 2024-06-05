@@ -202,7 +202,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/popular_places_container"
                 android:background="@color/new_gray"
-                android:padding="16dp" />
+                android:padding="16dp"
+                android:layout_marginBottom="50dp"/>
         </RelativeLayout>
     </ScrollView>
 

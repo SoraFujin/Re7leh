@@ -21,6 +21,7 @@ public class Menu extends AppCompatActivity {
 
     // TODO LIST:
     // Dont let the user put the app in horizontal mode
+    // Remove exported = true from activity_main
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
