@@ -29,6 +29,9 @@
         <activity
             android:name=".Menu"
             android:exported="false" />
+        <activity
+            android:name=".Management"
+            android:exported="false" />
     </application>
 
 </manifest>
