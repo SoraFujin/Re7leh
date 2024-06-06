@@ -1,41 +1,242 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/main_color">
+    android:background="@color/main_color"
+    tools:context=".Menu">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dropdown_menu_icon"
-        android:entries="@array/options_array" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation"
+        android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/mainText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/spinner"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="95dp"
-        android:ems="10"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="@color/orange"
-        android:text="Experience The World!"
-        android:textAlignment="center"
-        />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-<androidx.recyclerview.widget.RecyclerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_menu"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@id/mainText"
-    android:layout_marginTop="60dp"
-    android:scrollbars="horizontal">
+            <!-- Toolbar -->
+            <LinearLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/main_color"
+                android:padding="16dp"
+                android:orientation="horizontal">
 
-</androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Experience Palestine\nwith Re7leh!"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:layout_weight="1" />
 
-</RelativeLayout>
+                <FrameLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp">
+
+                    <ImageView
+                        android:id="@+id/profile_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/user_icon"
+                        android:background="@drawable/circular_background"
+                        android:scaleType="centerInside" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- Search Bar -->
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Search your trip destination"
+                android:fontFamily="@font/poppins_regular"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:drawableStart="@drawable/search_icon"
+                android:background="@drawable/edittext_rounded_corners"
+                android:padding="16dp"
+                android:layout_below="@id/toolbar"
+                android:layout_margin="16dp" />
+
+            <!-- Categories -->
+            <LinearLayout
+                android:id="@+id/categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/search_bar"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center">
+
+                <!-- Tour Icon -->
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/tour_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/trip_icon"
+                        android:background="@drawable/circular_background"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textColor="@color/white"
+                        android:text="Tours"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <!-- Hotel Icon -->
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/hotel_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/hotel_icon"
+                        android:background="@drawable/circular_background"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textColor="@color/white"
+                        android:text="Hotels"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <!-- Food Icon -->
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/food_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/restaurant_icon"
+                        android:background="@drawable/circular_background"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textColor="@color/white"
+                        android:text="Food"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <!-- Transportation Icon -->
+                <LinearLayout
+                    android:layout_width="74dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/transportation_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/transportation_icon"
+                        android:background="@drawable/circular_background"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textColor="@color/white"
+                        android:text="Transport"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Popular Places Section -->
+            <LinearLayout
+                android:id="@+id/popular_places_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/new_gray"
+                android:orientation="vertical"
+                android:layout_below="@id/categories"
+                android:layout_marginTop="26dp"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/popular_places_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Popular Places"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/popular_places_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/popular_places_container"
+                android:background="@color/new_gray"
+                android:padding="16dp"
+                android:layout_marginBottom="50dp"/>
+        </RelativeLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/new_gray"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="bottom">
+
+        <ImageView
+            android:id="@+id/home_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/home_icon"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/favorites_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/heart_icon"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/notification_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/notification_icon"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</FrameLayout>
