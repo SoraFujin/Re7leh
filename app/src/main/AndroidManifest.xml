@@ -29,6 +29,11 @@
         <activity
             android:name=".Menu"
             android:exported="true" />
+        <activity
+            android:name=".MainHotelActivity"
+            android:exported="true" />
+
     </application>
+
 
 </manifest>
