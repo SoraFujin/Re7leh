@@ -26,7 +26,7 @@ public class Menu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
 
         popularPlacesRecyclerView = findViewById(R.id.popular_places_recycler_view);
         popularPlacesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -43,5 +43,4 @@ public class Menu extends AppCompatActivity {
         popularPlaceAdapter = new PopularPlaceAdapter(popularPlaces);
         popularPlacesRecyclerView.setAdapter(popularPlaceAdapter);
     }
-
 }
