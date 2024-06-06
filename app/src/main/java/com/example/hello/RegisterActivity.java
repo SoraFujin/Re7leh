@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity{
 
         final EditText username = findViewById(R.id.username);
         final EditText password = findViewById(R.id.password);
-        final EditText email = findViewById(R.id.textInputLayoutEmail);
+        final EditText email = findViewById(R.id.email);
 
         TextView textViewLogIn = findViewById(R.id.loginText);
         textViewLogIn.setOnClickListener(new View.OnClickListener() {

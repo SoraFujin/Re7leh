@@ -16,15 +16,6 @@
         <item>Invite Friends</item>
         <item>Schedule Reminders</item>
         <item>Sign Out</item>
-        <string name="Llogin">Login</string>
-        <string name="username">Username</string>
-        <string name="password">Password</string>
-        <string name="loginbtn">login</string>
-        <string name="create_account">don\'t have an account? sign up</string>
-        <string name="fullname">Fullname</string>
-        <string name="signup">SignUp</string>
-        <string name="email">email</string>
-        <string name="loginfromhere"> Already have an account? <u>Login</u> </string>
 
 
 
