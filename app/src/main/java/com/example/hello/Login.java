@@ -28,10 +28,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText username = findViewById(R.id.usernameText);
-        final EditText password = findViewById(R.id.passwordText);
+        final EditText username = findViewById(R.id.textInputLayoutUsername);
+        final EditText password = findViewById(R.id.password);
 
-        TextView textViewSignUp = findViewById(R.id.textViewSignUp);
+        TextView textViewSignUp = findViewById(R.id.signuptext);
         textViewSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        Button loginButton = findViewById(R.id.loginButton);
+        Button loginButton = findViewById(R.id.loginbtn);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

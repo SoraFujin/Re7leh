@@ -30,11 +30,11 @@ public class RegisterActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        final EditText username = findViewById(R.id.usernameText);
-        final EditText password = findViewById(R.id.passwordText);
-        final EditText email = findViewById(R.id.emailText);
+        final EditText username = findViewById(R.id.username);
+        final EditText password = findViewById(R.id.password);
+        final EditText email = findViewById(R.id.textInputLayoutEmail);
 
-        TextView textViewLogIn = findViewById(R.id.textViewLogIn);
+        TextView textViewLogIn = findViewById(R.id.loginText);
         textViewLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity{
             }
         });
 
-        Button register = findViewById(R.id.registerButton);
+        Button register = findViewById(R.id.buttonSignUp);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
