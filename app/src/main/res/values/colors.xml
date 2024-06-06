@@ -5,4 +5,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#F4AE3E</color>
     <color name="pink">#F43EB1</color>
+    <color name="gray">#EEEEEE</color>
+    <color name="dark_gray">#555555</color>
+    <color name="light_blue">#e0e6f2</color>
+    <color name="new_gray">#FF272727</color>
 </resources>
