@@ -56,6 +56,13 @@
         <activity
             android:name=".AddEditTour"
             android:exported="false" />
+        <activity
+            android:name=".CarActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RestaurantActivity"
+            android:exported="true" />
+
     </application>
 
 
