@@ -71,7 +71,7 @@ public class Login extends AppCompatActivity {
                             Log.d("Error", exception.toString());
                         }
                         if(check.equals("yes")){
-                            Intent intent = new Intent(Login.this, Menu.class);
+                            Intent intent = new Intent(Login.this, Management.class);
                             startActivity(intent);
                         }else{
                             Toast.makeText(Login.this, "Username or password is incorrect", Toast.LENGTH_LONG).show();

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/main_color">
+
+    <!-- Spinner -->
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dropdown_menu_icon"
+        android:entries="@array/options_array" />
+
+    <TextView
+        android:id="@+id/tourNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner"
+        android:layout_marginStart="16dp"
+        android:text="Tour Name"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/tourNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner"
+        android:layout_toRightOf="@id/tourNameTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/destinationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tourNameEditText"
+        android:layout_marginStart="16dp"
+        android:text="Destination"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/destinationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tourNameEditText"
+        android:layout_toRightOf="@id/destinationTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/usersIDTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/destinationEditText"
+        android:layout_marginStart="16dp"
+        android:text="user ID"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/usersIDEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/destinationEditText"
+        android:layout_toRightOf="@id/usersIDTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/hotelsIDTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usersIDEditText"
+        android:layout_marginStart="16dp"
+        android:text="Hotel ID"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/hotelsIDEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usersIDEditText"
+        android:layout_toRightOf="@id/hotelsIDTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/restaurantsIDTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hotelsIDEditText"
+        android:layout_marginStart="16dp"
+        android:text="Restaurant ID"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/restaurantsIDEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hotelsIDEditText"
+        android:layout_toRightOf="@id/restaurantsIDTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/transportIDTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/restaurantsIDEditText"
+        android:layout_marginStart="16dp"
+        android:text="Transport ID"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/transportIDEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/restaurantsIDEditText"
+        android:layout_toRightOf="@id/transportIDTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/executeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/transportIDEditText"
+        android:layout_marginTop="25dp"
+        android:text="Execute"
+        android:textColor="@color/orange"
+        android:backgroundTint="#3ED2F4" />
+
+</RelativeLayout>

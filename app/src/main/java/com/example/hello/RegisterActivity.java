@@ -65,17 +65,6 @@ public class RegisterActivity extends AppCompatActivity{
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        JSONObject jsonParams = new JSONObject();
-        try {
-            jsonParams.put("username", username);
-            jsonParams.put("pass", pass);
-            jsonParams.put("email", email);
-            jsonParams.put("permission", "customer");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
 
         // Create a JsonObjectRequest with POST method
         StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
