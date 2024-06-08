@@ -2,9 +2,13 @@ package com.example.hello;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LandMarkFragment extends Fragment {
+    private String selectedCityName;
+    private List<LandMark> selectedPlaces;
     private LinearLayout cityContainer;
     private LinearLayout placeContainer;
     private List<City> cityList;
@@ -55,6 +61,8 @@ public class LandMarkFragment extends Fragment {
 
         populateData();
         populateCityScrollView(view);
+
+        Button nextButton = view.findViewById(R.id.Nextbtn);
 
         return view;
     }
@@ -139,4 +147,6 @@ public class LandMarkFragment extends Fragment {
             placeContainer.addView(placeView);
         }
     }
+
+
 }
