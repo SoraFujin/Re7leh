@@ -6,19 +6,10 @@
     android:padding="16dp"
     android:background="@color/main_color">
 
-    <!-- Spinner -->
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dropdown_menu_icon"
-        android:entries="@array/options_array" />
-
     <TextView
         android:id="@+id/tourNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spinner"
         android:layout_marginStart="16dp"
         android:text="Tour Name"
         android:layout_marginTop="30dp"/>
@@ -27,7 +18,6 @@
         android:id="@+id/tourNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spinner"
         android:layout_toRightOf="@id/tourNameTextView"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"/>

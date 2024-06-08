@@ -20,7 +20,6 @@ public class Management extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_management);
 
-        setSpinner();
         setMenuItems();
     }
 
@@ -62,30 +61,6 @@ public class Management extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void setSpinner() {
-        Spinner spinner = findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.options_array, R.layout.spinner_item_layout);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Redirect to selected activity from dropdown menu
-                String selectedOption = parent.getItemAtPosition(position).toString();
-                switch (selectedOption) {
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
     }
 
 }
