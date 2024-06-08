@@ -26,12 +26,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageTour extends AppCompatActivity {
+public class ManageRestaurants extends AppCompatActivity {
 
     private RequestQueue queue;
-    private List<Tours> items = new ArrayList<>();
+    private List<Restaurants> items = new ArrayList<>();
     private ListView listView;
-    private CustomListAdapter<Tours> toursAdapter;
+    private CustomListAdapter<Restaurants> restaurantsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,8 @@ public class ManageTour extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( ManageTour.this, AddEditTour.class);
+                Intent intent = new Intent( ManageRestaurants.this, AddEditHR.class);
+                intent.putExtra("type", 1);
                 intent.putExtra("op", 0);
                 startActivity(intent);
             }
@@ -51,9 +52,9 @@ public class ManageTour extends AppCompatActivity {
 
         queue = Volley.newRequestQueue(this);
         listView = findViewById(R.id.listView);
-        getTours();
-        toursAdapter = new CustomListAdapter<>(this, items);
-        listView.setAdapter(toursAdapter);
+        getRestaurants();
+        restaurantsAdapter = new CustomListAdapter<>(this, items);
+        listView.setAdapter(restaurantsAdapter);
     }
 
     private void setSpinner() {
@@ -80,8 +81,8 @@ public class ManageTour extends AppCompatActivity {
         });
     }
 
-    private void getTours() {
-        String url = "http://10.0.2.2/android/get_tours.php";
+    private void getRestaurants() {
+        String url = "http://10.0.2.2/android/get_restaurants.php";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -90,27 +91,25 @@ public class ManageTour extends AppCompatActivity {
                         try {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject object = response.getJSONObject(i);
-                                int id = object.getInt("id");
-                                String tour_name = object.getString("tour_name");
-                                String destination = object.getString("destination");
-                                int users_id = object.getInt("users_id");
-                                int hotels_id = object.getInt("hotels_id");
-                                int restaurants_id = object.getInt("restaurants_id");
-                                String transport_id = object.getString("transport_id");
+                                int id = object.getInt("ID");
+                                String name = object.getString("Name");
+                                String location = object.getString("location");
+                                float rating = (float) object.getDouble("rating");
+                                String imageName = object.getString("image_name");
 
-                                Tours tours = new Tours(id, tour_name, destination, users_id, hotels_id, restaurants_id, transport_id);
-                                items.add(tours);
+                                Restaurants restaurant = new Restaurants(id, name, location, rating, imageName);
+                                items.add(restaurant);
                             }
-                            toursAdapter.notifyDataSetChanged();
+                            restaurantsAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ManageTour.this, "Error parsing JSON", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ManageRestaurants.this, "Error parsing JSON", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ManageTour.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ManageRestaurants.this, "Error fetching data", Toast.LENGTH_SHORT).show();
             }
         }
         );

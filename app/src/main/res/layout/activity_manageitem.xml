@@ -14,11 +14,22 @@
         android:background="@drawable/dropdown_menu_icon"
         android:entries="@array/options_array" />
 
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner"
+        android:layout_marginTop="25dp"
+        android:text="Add New"
+        android:textColor="@color/orange"
+        android:backgroundTint="#3ED2F4"
+        />
+
     <ListView
-        android:id="@+id/lstItems"
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/spinner"
+        android:layout_below="@id/addButton"
         android:layout_marginTop="30dp" />
 
 

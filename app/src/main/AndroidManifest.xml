@@ -32,6 +32,27 @@
         <activity
             android:name=".Management"
             android:exported="false" />
+        <activity
+            android:name=".ManageHotels"
+            android:exported="false" />
+        <activity
+            android:name=".ManageRestaurants"
+            android:exported="false" />
+        <activity
+            android:name=".ManageTransport"
+            android:exported="false" />
+        <activity
+            android:name=".ManageTour"
+            android:exported="false" />
+        <activity
+            android:name=".AddEditHR"
+            android:exported="false" />
+        <activity
+            android:name=".AddEditTransport"
+            android:exported="false" />
+        <activity
+            android:name=".AddEditTour"
+            android:exported="false" />
     </application>
 
 </manifest>

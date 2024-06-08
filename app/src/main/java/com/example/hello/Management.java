@@ -33,7 +33,7 @@ public class Management extends AppCompatActivity {
         tour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Management.this, RegisterActivity.class);
+                Intent intent = new Intent(Management.this, ManageTour.class);
                 startActivity(intent);
             }
         });
@@ -41,7 +41,7 @@ public class Management extends AppCompatActivity {
         hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Management.this, RegisterActivity.class);
+                Intent intent = new Intent(Management.this, ManageHotels.class);
                 startActivity(intent);
             }
         });
@@ -49,7 +49,7 @@ public class Management extends AppCompatActivity {
         food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Management.this, RegisterActivity.class);
+                Intent intent = new Intent(Management.this, ManageRestaurants.class);
                 startActivity(intent);
             }
         });
@@ -57,7 +57,7 @@ public class Management extends AppCompatActivity {
         transport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Management.this, RegisterActivity.class);
+                Intent intent = new Intent(Management.this, ManageTransport.class);
                 startActivity(intent);
             }
         });
