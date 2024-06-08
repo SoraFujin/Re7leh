@@ -25,7 +25,7 @@ public class PlanTrip extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fragmentManager.beginTransaction()
-                        .replace(R.id.landMarkfragmentContainer, HotelFragment.class, null)
+                        .replace(R.id.landMarkfragmentContainer, LandMarkFragment.class, null)
                         .setReorderingAllowed(true)
                         .addToBackStack("name")
                         .commit();
@@ -38,7 +38,7 @@ public class PlanTrip extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fragmentManager.beginTransaction()
-                        .replace(R.id.landMarkfragmentContainer, TransportFragment.class, null).setReorderingAllowed(true)
+                        .replace(R.id.landMarkfragmentContainer, HotelFragment.class, null).setReorderingAllowed(true)
                         .addToBackStack("name")
                         .commit();
 
@@ -49,7 +49,7 @@ public class PlanTrip extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fragmentManager.beginTransaction()
-                        .replace(R.id.landMarkfragmentContainer, LandMarkFragment.class, null)
+                        .replace(R.id.landMarkfragmentContainer, FoodFragment.class, null)
                         .setReorderingAllowed(true)
                         .addToBackStack("name")
                         .commit();
@@ -61,7 +61,7 @@ public class PlanTrip extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fragmentManager.beginTransaction()
-                        .replace(R.id.landMarkfragmentContainer, FoodFragment.class, null)
+                        .replace(R.id.landMarkfragmentContainer, TransportFragment.class, null)
                         .setReorderingAllowed(true)
                         .addToBackStack("name")
                         .commit();

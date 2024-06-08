@@ -3,12 +3,247 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LandMarkFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/main_color">
+
+            <TextView
+                android:id="@+id/CityTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose A City"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:textColor="@color/black"/>
+            <Button
+                android:id="@+id/Nextbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Next"
+                android:textColor="@color/main_color"
+                android:fontFamily="@font/poppins_bold"
+                android:backgroundTint="@color/black"/>
+
+            <HorizontalScrollView
+                android:id="@+id/cityScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/citiyCardView"
+                        android:layout_width="2in"
+                        android:layout_height="1in"
+                        app:cardBackgroundColor="@color/black"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="10dp"
+                        android:layout_margin="5dp">
+
+                        <ImageView
+                            android:id="@+id/bethlehemImageView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:src="@drawable/bethlehem"
+                            android:scaleType="fitXY"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/citiyCardView1"
+                        android:layout_width="2in"
+                        android:layout_height="1in"
+                        app:cardBackgroundColor="@color/black"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="10dp"
+                        android:layout_margin="5dp">
+
+                        <ImageView
+                            android:id="@+id/bethlehemImageView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:src="@drawable/bethlehem"
+                            android:scaleType="fitXY"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/citiyCardView3"
+                        android:layout_width="2in"
+                        android:layout_height="1in"
+                        app:cardBackgroundColor="@color/black"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="10dp"
+                        android:layout_margin="5dp">
+
+                        <ImageView
+                            android:id="@+id/bethlehemImageView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:src="@drawable/bethlehem"
+                            android:scaleType="fitXY"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/citiyCardView4"
+                        android:layout_width="2in"
+                        android:layout_height="1in"
+                        app:cardBackgroundColor="@color/black"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="10dp"
+                        android:layout_margin="5dp">
+
+                        <ImageView
+                            android:id="@+id/bethlehemImageView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:src="@drawable/bethlehem"
+                            android:scaleType="fitXY"/>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/citiyCardView5"
+                        android:layout_width="2in"
+                        android:layout_height="1in"
+                        app:cardBackgroundColor="@color/black"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="10dp"
+                        android:layout_margin="5dp">
+
+                        <ImageView
+                            android:id="@+id/bethlehemImageView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:src="@drawable/bethlehem"
+                            android:scaleType="fitXY"/>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="land mark" />
+        android:overScrollMode="never"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/citiyCardView11"
+                android:layout_width="wrap_content"
+                android:layout_height="1.2in"
+                app:cardBackgroundColor="@color/black"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="5dp">
+
+                <ImageView
+                    android:id="@+id/bethlehemImageView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:src="@drawable/jerusalem"
+                    android:scaleType="fitXY"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/citiyCardView12"
+                android:layout_width="wrap_content"
+                android:layout_height="1.2in"
+                app:cardBackgroundColor="@color/black"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="5dp">
+
+                <ImageView
+                    android:id="@+id/bethlehemImageView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:src="@drawable/bethlehem"
+                    android:scaleType="fitXY"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/citiyCardView33"
+                android:layout_width="wrap_content"
+                android:layout_height="1.2in"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="5dp">
+
+                <ImageView
+                    android:id="@+id/bethlehemImageView33"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:src="@drawable/bethlehem"
+                    android:scaleType="fitXY"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/citiyCardView44"
+                android:layout_width="wrap_content"
+                android:layout_height="1.2in"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="5dp">
+
+                <ImageView
+                    android:id="@+id/bethlehemImageView44"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:src="@drawable/bethlehem"
+                    android:scaleType="fitXY"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/citiyCardView55"
+                android:layout_width="wrap_content"
+                android:layout_height="1.2in"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="5dp">
+
+                <ImageView
+                    android:id="@+id/bethlehemImageView55"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:src="@drawable/jerusalem"
+                    android:scaleType="fitXY"/>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+        </LinearLayout>
 
 </FrameLayout>
