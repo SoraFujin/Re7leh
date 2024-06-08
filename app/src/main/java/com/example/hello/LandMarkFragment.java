@@ -1,5 +1,7 @@
 package com.example.hello;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -63,6 +65,19 @@ public class LandMarkFragment extends Fragment {
         populateCityScrollView(view);
 
         Button nextButton = view.findViewById(R.id.Nextbtn);
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getParentFragmentManager();
+
+                fragmentManager.beginTransaction()
+                        .replace(R.id.landMarkfragmentContainer, TransportFragment.class, null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("name")
+                        .commit();
+                }
+        });
 
         return view;
     }
@@ -130,10 +145,22 @@ public class LandMarkFragment extends Fragment {
             TextView cityTextView = cityView.findViewById(R.id.cityTextView);
             cityTextView.setText(city.getCityName());
 
-            cityView.setOnClickListener(v -> updatePlaceScrollView(city.getPlaces()));
+            cityView.setOnClickListener(v -> {
+                String selectedCityName = city.getCityName();
+
+                if (getActivity() != null) {
+                    // Save the selected city name in SharedPreferences
+                    SharedPreferences.Editor editor = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
+                    editor.putString("selectedCityName", selectedCityName);
+                    editor.apply();
+                }
+
+                updatePlaceScrollView(city.getPlaces());
+            });
             cityScrollView.addView(cityView);
         }
     }
+
 
     private void updatePlaceScrollView(List<LandMark> places) {
         placeContainer.removeAllViews();

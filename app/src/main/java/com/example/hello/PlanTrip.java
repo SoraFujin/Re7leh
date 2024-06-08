@@ -1,5 +1,6 @@
 package com.example.hello;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import java.util.ArrayList;
 
 public class PlanTrip extends AppCompatActivity {
+    private String selectedCityName;
     private ImageView landImageView, hotelImageView, resturantImageView, transportationImageView;
     private  FragmentManager fragmentManager = getSupportFragmentManager();
     private ArrayList<LandMark> selectedHotels;
@@ -18,6 +20,9 @@ public class PlanTrip extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_trip);
+
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        selectedCityName = prefs.getString("selectedCityName", "");
 
         landImageView = findViewById(R.id.land_mark_icon);
         hotelImageView = findViewById(R.id.hotel_icon);
