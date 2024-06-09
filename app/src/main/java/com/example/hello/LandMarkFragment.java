@@ -21,6 +21,7 @@ import java.util.List;
 public class LandMarkFragment extends Fragment {
     private String selectedCityName;
     private List<LandMark> selectedPlaces;
+    private String selectedPlace;
     private LinearLayout cityContainer;
     private LinearLayout placeContainer;
     private List<City> cityList;
@@ -76,7 +77,7 @@ public class LandMarkFragment extends Fragment {
                         .setReorderingAllowed(true)
                         .addToBackStack("name")
                         .commit();
-                }
+            }
         });
 
         return view;
@@ -132,7 +133,10 @@ public class LandMarkFragment extends Fragment {
         cityList.add(new City(R.drawable.ramallah, "Ramallah", ramallahPlaces));
         cityList.add(new City(R.drawable.jericho, "Jericho", jerichoPlaces));
         cityList.add(new City(R.drawable.nablus,"Nablus", nablusPlaces));
+
+
     }
+
 
     private void populateCityScrollView(View rootView) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -146,21 +150,14 @@ public class LandMarkFragment extends Fragment {
             cityTextView.setText(city.getCityName());
 
             cityView.setOnClickListener(v -> {
-                String selectedCityName = city.getCityName();
-
-                if (getActivity() != null) {
-                    // Save the selected city name in SharedPreferences
-                    SharedPreferences.Editor editor = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
-                    editor.putString("selectedCityName", selectedCityName);
-                    editor.apply();
-                }
-
+                selectedCityName = city.getCityName();
+                saveCityAndPlace(selectedCityName, null);
                 updatePlaceScrollView(city.getPlaces());
             });
+
             cityScrollView.addView(cityView);
         }
     }
-
 
     private void updatePlaceScrollView(List<LandMark> places) {
         placeContainer.removeAllViews();
@@ -170,10 +167,21 @@ public class LandMarkFragment extends Fragment {
             ImageView placeImageView = placeView.findViewById(R.id.placeImageView);
             TextView placeTextView = placeView.findViewById(R.id.PlaceTextView);
             placeTextView.setText(place.getName());
+
+            placeView.setOnClickListener(v -> {
+                selectedPlace = place.getName();
+                saveCityAndPlace(selectedCityName, selectedPlace);
+            });
+
             placeImageView.setImageResource(place.getImageResourceId());
             placeContainer.addView(placeView);
         }
     }
 
-
+    private void saveCityAndPlace(String cityName, String placeName) {
+        SharedPreferences.Editor editor = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit();
+        editor.putString("selectedCityName", cityName);
+        editor.putString("selectedPlaceName", placeName);
+        editor.apply();
+    }
 }
