@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        final EditText fullname = findViewById(R.id.fullname);
         final EditText username = findViewById(R.id.username);
         final EditText password = findViewById(R.id.password);
         final EditText email = findViewById(R.id.email);
@@ -48,10 +49,11 @@ public class RegisterActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 if(android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
+                    String fullname2 = fullname.getText().toString();
                     String user = username.getText().toString();
                     String pass = password.getText().toString();
                     String EMAIL = email.getText().toString();
-                    registerNew(user,pass,EMAIL);
+                    registerNew(fullname2,user,pass,EMAIL);
                 }else{
                     email.setBackgroundColor(Color.RED);
                     Toast.makeText(RegisterActivity.this, "Email not valid", Toast.LENGTH_LONG).show();
@@ -60,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity{
         });
     }
 
-    private void registerNew(String username, String pass,String email){
+    private void registerNew(String fullname, String username, String pass,String email){
         String url = "http://10.0.2.2/android/registerNew.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -111,6 +113,7 @@ public class RegisterActivity extends AppCompatActivity{
 
                 // on below line we are passing our
                 // key and value pair to our parameters.
+                params.put("fullname", fullname);
                 params.put("username", username);
                 params.put("pass", pass);
                 params.put("email", email);

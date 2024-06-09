@@ -1,6 +1,9 @@
 package com.example.hello;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -42,5 +45,16 @@ public class Menu extends AppCompatActivity {
 
         popularPlaceAdapter = new PopularPlaceAdapter(popularPlaces);
         popularPlacesRecyclerView.setAdapter(popularPlaceAdapter);
+
+        ImageView profilePic = findViewById(R.id.profile_picture);
+
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(Login.this, RegisterActivity.class);
+                //startActivity(intent);
+            }
+        });
+
     }
 }
