@@ -57,6 +57,9 @@
             android:name=".AddEditTour"
             android:exported="false" />
         <activity
+            android:name=".WishlistActivity"
+            android:exported="false" />
+        <activity
             android:name=".CarActivity"
             android:exported="true" />
         <activity
