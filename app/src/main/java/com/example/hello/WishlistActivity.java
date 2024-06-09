@@ -80,7 +80,7 @@ public class WishlistActivity extends AppCompatActivity {
     }
 
     // Method to remove favorite from the list and SharedPreferences
-    private void removeFavorite(int position) {
+    private void removeFavorite(int position) { try {
         PopularPlace place = wishlistPlaces.get(position);
         place.setFavorite(false); // Update the favorite status
         wishlistPlaces.remove(position); // Remove from the list
@@ -95,5 +95,22 @@ public class WishlistActivity extends AppCompatActivity {
         // Notify adapter about item removal
         wishlistAdapter.notifyItemRemoved(position);
         Toast.makeText(this, place.getName() + " Removed from wishlist.", Toast.LENGTH_SHORT).show();
+    } catch (Exception e) {
+        PopularPlace place = wishlistPlaces.get(0);
+        place.setFavorite(false); // Update the favorite status
+        wishlistPlaces.remove(0); // Remove from the list
+
+        // Update SharedPreferences
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        String jsonFavorites = new Gson().toJson(wishlistPlaces);
+        editor.putString(FAVORITES_KEY, jsonFavorites);
+        editor.apply();
+
+        // Notify adapter about item removal
+        wishlistAdapter.notifyItemRemoved(position);
+        Toast.makeText(this, place.getName() + " Removed from wishlist.", Toast.LENGTH_SHORT).show();
+    }
+
     }
 }
