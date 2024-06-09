@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,6 +31,16 @@ public class WishlistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
 
+        if (Menu.manager) {
+            ImageView managerIcon = findViewById(R.id.manager_icon);
+            managerIcon.setVisibility(View.VISIBLE);
+            managerIcon.setOnClickListener(e -> {
+                Intent intent = new Intent(this, Management.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+
         // Initialize RecyclerView
         wishlistRecyclerView = findViewById(R.id.wishlist_recycler_view);
         wishlistRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -42,6 +53,7 @@ public class WishlistActivity extends AppCompatActivity {
         homeIcon.setOnClickListener(e -> {
             Intent intent = new Intent(this, Menu.class);
             startActivity(intent);
+            finish();
         });
     }
 

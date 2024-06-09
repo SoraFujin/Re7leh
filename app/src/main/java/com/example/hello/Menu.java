@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -39,10 +40,32 @@ public class Menu extends AppCompatActivity {
     private Gson gson;
     private SharedPreferences sharedPreferences;
 
+    static public boolean manager = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Check if the user is a manager
+        Intent externalIntent = getIntent();
+        String value = externalIntent.getStringExtra("permission");
+
+        if (value != null) {
+            if (value.equals("manager")) {
+                manager = true;
+            }
+        }
+
+        if (manager) {
+            ImageView managerIcon = findViewById(R.id.manager_icon);
+            managerIcon.setVisibility(View.VISIBLE);
+            managerIcon.setOnClickListener(e -> {
+                Intent intent = new Intent(this, Management.class);
+                startActivity(intent);
+                finish();
+            });
+        }
 
         popularPlacesRecyclerView = findViewById(R.id.popular_places_recycler_view);
         popularPlacesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -73,6 +96,7 @@ public class Menu extends AppCompatActivity {
         favouriteIcon.setOnClickListener(e -> {
             Intent intent = new Intent(this, WishlistActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 
