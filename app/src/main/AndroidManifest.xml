@@ -56,6 +56,9 @@
         <activity
             android:name=".AddEditTour"
             android:exported="false" />
+        <activity
+            android:name=".WishlistActivity"
+            android:exported="false" />
     </application>
 
 
