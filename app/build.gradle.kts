@@ -45,6 +45,8 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation(libs.gson)
     implementation ("androidx.appcompat:appcompat:1.7.0")
+    implementation(libs.gson)
+    implementation ("androidx.appcompat:appcompat:1.7.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
