@@ -8,26 +8,25 @@
     android:background="#020202"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainHotelActivity">
+    tools:context=".RestaurantActivity">
 
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_back"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="8dp"
+        android:src="@drawable/baseline_back"
         android:visibility="gone" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="2dp"
         android:layout_margin="16dp"
-        android:background="@drawable/search_view_bg"
-        android:queryHint="Search by location"
-        app:iconifiedByDefault="false" />
-
+        android:background="@drawable/search_view_bg" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"

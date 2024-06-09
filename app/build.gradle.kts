@@ -43,10 +43,16 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
+<<<<<<< HEAD
     implementation(libs.gson)
+=======
+    implementation ("androidx.appcompat:appcompat:1.7.0")
+>>>>>>> 69edd0cd2857819aba126a70542c7417c7362872
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("com.github.bumptech.glide:glide:4.11.0")
