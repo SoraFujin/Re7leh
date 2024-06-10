@@ -3,6 +3,7 @@ package com.example.hello;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +16,28 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import java.lang.reflect.Array;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class HotelFragment extends Fragment {
-    private TextView cityTextView;
-
+    private String cityName;
     private ArrayList<LandMark> selectedHotels;
-    private String selectedCityName;
-    private SharedPreferences sharedPreferences;
+    private RequestQueue requestQueue;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
+    private String url = "http://10.0.2.2/android/getHotels.php";
 
     public HotelFragment() {
         // Required empty public constructor
@@ -47,63 +55,29 @@ public class HotelFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        requestQueue = Volley.newRequestQueue(getContext());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hotel, container, false);
 
-        sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
         TextView cityTextView = view.findViewById(R.id.HotelTextView);
-        String cityName = sharedPreferences.getString("selectedCityName", "");
+        cityName = sharedPreferences.getString("selectedCityName", "");
         String hotels = "Hotels in: " + (cityName.isEmpty() ? "Where would you like to stay" : cityName);
         cityTextView.setText(hotels);
 
-        if (sharedPreferences != null) {
-            selectedCityName = sharedPreferences.getString("selectedCityName", "");
-
-            if (!selectedCityName.isEmpty()) {
-                selectedHotels = getSelectedHotels(selectedCityName);
-            } else {
-                selectedHotels = getAllHotels();
-            }
-
-            LinearLayout hotelContainer = view.findViewById(R.id.hotelContainer);
-
-            if (hotelContainer != null) {
-                for (LandMark hotel : selectedHotels) {
-                    View hotelView = inflater.inflate(R.layout.hotel_item, hotelContainer, false);
-
-                    ImageView hotelImageView = hotelView.findViewById(R.id.hotelImageView);
-                    hotelImageView.setImageResource(hotel.getImageResourceId());
-
-                    TextView hotelNameTextView = hotelView.findViewById(R.id.hotelNameTextView);
-                    hotelNameTextView.setText(hotel.getName());
-
-                    hotelView.setOnClickListener(v -> {
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("selectedHotelName", hotel.getName());
-                        editor.apply();
-                        Toast.makeText(getContext(), "Selected place: " + hotel.getName(), Toast.LENGTH_SHORT).show();
-                    });
-
-                    hotelContainer.addView(hotelView);
-                }
-            }
-        }
-
         Button nextButton = view.findViewById(R.id.Nextbtn);
+        nextButton.setEnabled(false); // Disable button during data fetching
+
+        fetchHotels();
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getParentFragmentManager();
-
                 fragmentManager.beginTransaction()
                         .replace(R.id.landMarkfragmentContainer, LandMarkFragment.class, null)
                         .setReorderingAllowed(true)
@@ -115,99 +89,65 @@ public class HotelFragment extends Fragment {
         return view;
     }
 
-    private ArrayList<LandMark> getSelectedHotels(String selectedCityName) {
+    private void fetchHotels() {
 
-        ArrayList<LandMark> hotels = new ArrayList<>();
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            try {
+                                Log.d("niiiiiiiiii", response.toString());
+                                parseHotels(response);
+                            } catch (JSONException e) {
 
-        switch (selectedCityName) {
-            case "Bethlehem":
-                hotels.add(new LandMark(R.drawable.abrahams, "Abrahams Herberge - Beit Ibrahem"));
-                hotels.add(new LandMark(R.drawable.grandhotelbethlahem, "Grand Hotel Bethlehem"));
-                hotels.add(new LandMark(R.drawable.lotushotel, "Lotus Boutique Hotel"));
-                hotels.add(new LandMark(R.drawable.bethlehem, "Bethlehem Hotel"));
-                hotels.add(new LandMark(R.drawable.saintmichael, "Saint Michael Hotel"));
-                hotels.add(new LandMark(R.drawable.assarayahotel, "Assaraya Palace Hotel"));
+                                Toast.makeText(getContext(), "Error parsing data", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("niiiiiiiiiis", error.toString());
+                            Toast.makeText(getContext(), "Error fetching data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+        requestQueue.add(jsonArrayRequest);
+    }
 
-                break;
-            case "Jerusalem":
-                hotels.add(new LandMark(R.drawable.eldanhotel, "Eldan Hotel"));
-                hotels.add(new LandMark(R.drawable.ladystern, "Lady Stern Jerusalem Hotel"));
-                hotels.add(new LandMark(R.drawable.ramatrachel, "Ramat Rachel Resort"));
-                hotels.add(new LandMark(R.drawable.grandcourthotel, "Grand Court Hotel"));
-                hotels.add(new LandMark(R.drawable.jerusalemgate, "Jerusalem Gate Hotel"));
-                hotels.add(new LandMark(R.drawable.kingdavid, "King David Hotel Jerusalem"));
+    private void parseHotels(JSONArray jsonArray) throws JSONException {
+        selectedHotels = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            String hotelName = jsonObject.optString("name", "");
+            String hotelImage = jsonObject.optString("imageUrl", "");
+            String cityName = jsonObject.optString("cityName", "");
+            selectedHotels.add(new LandMark(hotelImage, hotelName, cityName));
 
-                break;
-            case "Ramallah":
-                hotels.add(new LandMark(R.drawable.ankarshotel, "Ankars Suites & Hotel"));
-                hotels.add(new LandMark(R.drawable.millennium, "Millennium Palestine Ramallah"));
-                hotels.add(new LandMark(R.drawable.caesarhotel, "Caesar Hotel Ramallah"));
-                hotels.add(new LandMark(R.drawable.mirador, "Mirador Hotel"));
-                hotels.add(new LandMark(R.drawable.royalhotel, "Royal Court Hotel"));
-                hotels.add(new LandMark(R.drawable.carmel, "Carmel Hotel"));
-
-                break;
-            case "Jericho":
-                hotels.add(new LandMark(R.drawable.auberg, "Auberg-Inn Guesthouse"));
-                hotels.add(new LandMark(R.drawable.samihotel, "Sami Hostel"));
-                hotels.add(new LandMark(R.drawable.villastar, "Villa Star"));
-                hotels.add(new LandMark(R.drawable.jerichoresortvillage, "Jericho Resort Village"));
-                hotels.add(new LandMark(R.drawable.qashvillas, "Qash Villas"));
-                hotels.add(new LandMark(R.drawable.kareemvilla, "Kareem Villa"));
-
-                break;
-            case "Nablus":
-                hotels.add(new LandMark(R.drawable.royalsuits, "Royal Suites"));
-                hotels.add(new LandMark(R.drawable.saleemafandi, "Saleem Afandi Hotel"));
-                hotels.add(new LandMark(R.drawable.israhotel, "Isra Hotel"));
-                hotels.add(new LandMark(R.drawable.orienthotel, "Orient Hotel"));
-                hotels.add(new LandMark(R.drawable.khanalwakala, "Khan Alwakala Hotel"));
-                hotels.add(new LandMark(R.drawable.ycc, "YCC Guesthouse"));
-
-                break;
         }
-
-        return hotels;
+        populateHotelViews();
     }
 
-    private ArrayList<LandMark> getAllHotels() {
-        ArrayList<LandMark> hotels = new ArrayList<>();
-        hotels.add(new LandMark(R.drawable.abrahams, "Abrahams Herberge - Beit Ibrahem"));
-        hotels.add(new LandMark(R.drawable.grandhotelbethlahem, "Grand Hotel Bethlehem"));
-        hotels.add(new LandMark(R.drawable.lotushotel, "Lotus Boutique Hotel"));
-        hotels.add(new LandMark(R.drawable.bethlehem, "Bethlehem Hotel"));
-        hotels.add(new LandMark(R.drawable.saintmichael, "Saint Michael Hotel"));
-        hotels.add(new LandMark(R.drawable.assarayahotel, "Assaraya Palace Hotel"));
-
-        hotels.add(new LandMark(R.drawable.eldanhotel, "Eldan Hotel"));
-        hotels.add(new LandMark(R.drawable.ladystern, "Lady Stern Jerusalem Hotel"));
-        hotels.add(new LandMark(R.drawable.ramatrachel, "Ramat Rachel Resort"));
-        hotels.add(new LandMark(R.drawable.grandcourthotel, "Grand Court Hotel"));
-        hotels.add(new LandMark(R.drawable.jerusalemgate, "Jerusalem Gate Hotel"));
-        hotels.add(new LandMark(R.drawable.kingdavid, "King David Hotel Jerusalem"));
-
-        hotels.add(new LandMark(R.drawable.ankarshotel, "Ankars Suites & Hotel"));
-        hotels.add(new LandMark(R.drawable.millennium, "Millennium Palestine Ramallah"));
-        hotels.add(new LandMark(R.drawable.caesarhotel, "Caesar Hotel Ramallah"));
-        hotels.add(new LandMark(R.drawable.mirador, "Mirador Hotel"));
-        hotels.add(new LandMark(R.drawable.royalhotel, "Royal Court Hotel"));
-        hotels.add(new LandMark(R.drawable.carmel, "Carmel Hotel"));
-
-        hotels.add(new LandMark(R.drawable.auberg, "Auberg-Inn Guesthouse"));
-        hotels.add(new LandMark(R.drawable.samihotel, "Sami Hostel"));
-        hotels.add(new LandMark(R.drawable.villastar, "Villa Star"));
-        hotels.add(new LandMark(R.drawable.jerichoresortvillage, "Jericho Resort Village"));
-        hotels.add(new LandMark(R.drawable.qashvillas, "Qash Villas"));
-        hotels.add(new LandMark(R.drawable.kareemvilla, "Kareem Villa"));
-
-        hotels.add(new LandMark(R.drawable.royalsuits, "Royal Suites"));
-        hotels.add(new LandMark(R.drawable.saleemafandi, "Saleem Afandi Hotel"));
-        hotels.add(new LandMark(R.drawable.israhotel, "Isra Hotel"));
-        hotels.add(new LandMark(R.drawable.orienthotel, "Orient Hotel"));
-        hotels.add(new LandMark(R.drawable.khanalwakala, "Khan Alwakala Hotel"));
-        hotels.add(new LandMark(R.drawable.ycc, "YCC Guesthouse"));
-
-        return hotels;
+    private void populateHotelViews() {
+        View view = getView();
+        if (view != null) {
+            LinearLayout hotelContainer = view.findViewById(R.id.hotelContainer);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            for (LandMark hotel : selectedHotels) {
+              if(hotel.getCityName().equals(cityName)){
+                  View hotelView = inflater.inflate(R.layout.hotel_item, hotelContainer, false);
+                  ImageView hotelImageView = hotelView.findViewById(R.id.hotelImageView);
+                  Glide.with(this).load(hotel.getImageUrl()).into(hotelImageView);
+                  TextView hotelNameTextView = hotelView.findViewById(R.id.hotelNameTextView);
+                  hotelNameTextView.setText(hotel.getName());
+                  hotelContainer.addView(hotelView);
+              }
+            }
+            Button nextButton = view.findViewById(R.id.Nextbtn);
+            nextButton.setEnabled(true);
+        }
     }
-
 }

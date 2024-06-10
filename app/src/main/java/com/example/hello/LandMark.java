@@ -2,15 +2,25 @@ package com.example.hello;
 
 public class LandMark {
     private String name;
-    private int imageResourceId;
+    private String imageUrl;
+private String cityName;
 
-    public LandMark(int imageResourceId, String name){
-        this.imageResourceId = imageResourceId;
-        this.name = name;
+    public String getCityName() {
+        return cityName;
     }
 
-    public int getImageResourceId() {
-        return imageResourceId;
+    public LandMark(String imageUrl, String name){
+        this.imageUrl = imageUrl;
+        this.name = name;
+    }
+    public LandMark(String imageUrl, String name, String cityName){
+        this.imageUrl = imageUrl;
+        this.name = name;
+        this.cityName = cityName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getName(){

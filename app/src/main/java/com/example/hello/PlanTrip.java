@@ -20,6 +20,8 @@ public class PlanTrip extends AppCompatActivity {
     private ArrayList<LandMark> selectedHotels;
     private Button submit;
 
+    //TODO onStop method to delete the old data if the user exits
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -3,6 +3,7 @@ package com.example.hello;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +16,32 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class FoodFragment extends Fragment {
-    private TextView resturantTextView;
-
     private ArrayList<LandMark> selectedRestaurants;
-    private String selectedCityName;
+    private String cityName;
     private SharedPreferences sharedPreferences;
+    private RequestQueue requestQueue;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
+    private String url = "http://10.0.2.2/android/getResturants.php";
 
     public FoodFragment() {
         // Required empty public constructor
@@ -50,6 +63,7 @@ public class FoodFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        requestQueue = Volley.newRequestQueue(getContext());
     }
 
     @Override
@@ -58,43 +72,12 @@ public class FoodFragment extends Fragment {
 
         sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
-        resturantTextView = view.findViewById(R.id.ResturantTextView);
-        String cityName = sharedPreferences.getString("selectedCityName", "");
+        TextView restaurantTextView = view.findViewById(R.id.RestaurantTextView);
+        cityName = sharedPreferences.getString("selectedCityName", "");
         String restaurants = "Restaurants in: " + (cityName.isEmpty() ? "Where would you like to dine" : cityName);
-        resturantTextView.setText(restaurants);
+        restaurantTextView.setText(restaurants);
 
-        if (sharedPreferences != null) {
-            selectedCityName = sharedPreferences.getString("selectedCityName", "");
-
-            if (!selectedCityName.isEmpty()) {
-                selectedRestaurants = getSelectedRestaurants(selectedCityName);
-            } else {
-                selectedRestaurants = getAllRestaurants();
-            }
-
-            LinearLayout restaurantContainer = view.findViewById(R.id.resturantContainer);
-
-            if (restaurantContainer != null) {
-                for (LandMark restaurant : selectedRestaurants) {
-                    View restaurantView = inflater.inflate(R.layout.hotel_item, restaurantContainer, false);
-
-                    ImageView restaurantImageView = restaurantView.findViewById(R.id.hotelImageView);
-                    restaurantImageView.setImageResource(restaurant.getImageResourceId());
-
-                    TextView restaurantNameTextView = restaurantView.findViewById(R.id.hotelNameTextView);
-                    restaurantNameTextView.setText(restaurant.getName());
-
-                    restaurantView.setOnClickListener(v -> {
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("selectedRestaurantName", restaurant.getName());
-                        editor.apply();
-                        Toast.makeText(getContext(), "Selected place: " + restaurant.getName(), Toast.LENGTH_SHORT).show();
-                    });
-
-                    restaurantContainer.addView(restaurantView);
-                }
-            }
-        }
+        fetchRestaurants();
 
         Button nextButton = view.findViewById(R.id.Nextbtn);
 
@@ -102,7 +85,6 @@ public class FoodFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getParentFragmentManager();
-
                 fragmentManager.beginTransaction()
                         .replace(R.id.landMarkfragmentContainer, HotelFragment.class, null)
                         .setReorderingAllowed(true)
@@ -114,99 +96,60 @@ public class FoodFragment extends Fragment {
         return view;
     }
 
-    private ArrayList<LandMark> getSelectedRestaurants(String selectedCityName) {
+    private void fetchRestaurants() {
 
-        ArrayList<LandMark> restaurants = new ArrayList<>();
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            parseRestaurants(response);
+                        } catch (JSONException e) {
 
-        switch (selectedCityName) {
-            case "Bethlehem":
-                restaurants.add(new LandMark(R.drawable.anthonyspizaa, "Anthonys Pizza"));
-                restaurants.add(new LandMark(R.drawable.alsufararesturant, "Al Sufara Resturant"));
-                restaurants.add(new LandMark(R.drawable.tabooresturant, "Taboo Burger Bar"));
-                restaurants.add(new LandMark(R.drawable.ilforo, "Il Forno"));
-                restaurants.add(new LandMark(R.drawable.askadinya, "Askadinya"));
-                restaurants.add(new LandMark(R.drawable.jalajungle, "Jala Jungle"));
-                break;
-            case "Jerusalem":
-                restaurants.add(new LandMark(R.drawable.anthonyspizaa, "Anthonys Pizza"));
-                restaurants.add(new LandMark(R.drawable.sarwastreetkitchen, "Sarwa Street Kitchen"));
-                restaurants.add(new LandMark(R.drawable.dejabu, "Deja Bu"));
-                restaurants.add(new LandMark(R.drawable.pergamon, "Pergamon Resturant"));
-                restaurants.add(new LandMark(R.drawable.katy, "Katy's"));
-                restaurants.add(new LandMark(R.drawable.beerbazaar, "BeerBazaar Jerusalem"));
-                break;
-            case "Ramallah":
-                restaurants.add(new LandMark(R.drawable.zest, "Zest Resturant"));
-                restaurants.add(new LandMark(R.drawable.snowbar, "SnowBar Garden: Pool, Resturant & Bar"));
-                restaurants.add(new LandMark(R.drawable.darna, "Darna Resturant"));
-                restaurants.add(new LandMark(R.drawable.cafelevie, "Cafe La Vie"));
-                restaurants.add(new LandMark(R.drawable.azure, "Azure Resturant"));
-                restaurants.add(new LandMark(R.drawable.bahriresturant, "Bahri Resturant"));
-                restaurants.add(new LandMark(R.drawable.lazaward, "Lazaward"));
-                break;
+                            Toast.makeText(getContext(), "Error parsing data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Error fetching data", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonArrayRequest);
+    }
 
-            case "Jericho":
-                restaurants.add(new LandMark(R.drawable.mecasa, "Me Casa Resturant"));
-                restaurants.add(new LandMark(R.drawable.limona, "Limona"));
-                restaurants.add(new LandMark(R.drawable.lowestbarintheworld, "Lowest Bar in The World"));
-                restaurants.add(new LandMark(R.drawable.cafejerico, "21Cafe Jericho"));
-                restaurants.add(new LandMark(R.drawable.moonlightrest, "Moon Light Rest House"));
-                restaurants.add(new LandMark(R.drawable.sultanaresturant, "Sultana Resturant"));
-                break;
+    private void parseRestaurants(JSONArray jsonArray) throws JSONException {
+        selectedRestaurants = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            String restaurantName = jsonObject.getString("name");
+            String imageUrl = jsonObject.getString("imageUrl");
+            String cityName = jsonObject.getString("cityName");
 
-            case "Nablus":
-                restaurants.add(new LandMark(R.drawable.alflaykat, "Mateam Alf Laylat W Laylat - Nabulus"));
-                restaurants.add(new LandMark(R.drawable.noshacafe, "Nosha Cafe"));
-                restaurants.add(new LandMark(R.drawable.burgerspace, "Burger Space"));
-                restaurants.add(new LandMark(R.drawable.alkonisweets, "Al Koni Sweets"));
-                restaurants.add(new LandMark(R.drawable.orgada, "Orgada Burgers"));
-                restaurants.add(new LandMark(R.drawable.cedarz, "Cedarz Gelato & Coffe House"));
-                break;
+            selectedRestaurants.add(new LandMark(imageUrl, restaurantName, cityName));
         }
-
-        return restaurants;
+        populateRestaurantViews();
     }
 
-    private ArrayList<LandMark> getAllRestaurants() {
-        ArrayList<LandMark> restaurants = new ArrayList<>();
+    private void populateRestaurantViews() {
+        LinearLayout restaurantContainer = getView().findViewById(R.id.restaurantContainer);
+        LayoutInflater inflater = LayoutInflater.from(getContext());
 
-        restaurants.add(new LandMark(R.drawable.anthonyspizaa, "Anthonys Pizza"));
-        restaurants.add(new LandMark(R.drawable.alsufararesturant, "Al Sufara Resturant"));
-        restaurants.add(new LandMark(R.drawable.tabooresturant, "Taboo Burger Bar"));
-        restaurants.add(new LandMark(R.drawable.ilforo, "Il Forno"));
-        restaurants.add(new LandMark(R.drawable.askadinya, "Askadinya"));
-        restaurants.add(new LandMark(R.drawable.jalajungle, "Jala Jungle"));
+        for (LandMark restaurant : selectedRestaurants) {
+            if(restaurant.getCityName().equals(cityName)){
+                View restaurantView = inflater.inflate(R.layout.resturant_item, restaurantContainer, false);
+                ImageView restaurantImageView = restaurantView.findViewById(R.id.resturantImageView);
+                Glide.with(this).load(restaurant.getImageUrl()).into(restaurantImageView);
+                TextView restaurantNameTextView = restaurantView.findViewById(R.id.resturantNameTextView);
+                restaurantNameTextView.setText(restaurant.getName());
+                restaurantContainer.addView(restaurantView);
+            }
 
-        restaurants.add(new LandMark(R.drawable.anthonyspizaa, "Anthonys Pizza"));
-        restaurants.add(new LandMark(R.drawable.sarwastreetkitchen, "Sarwa Street Kitchen"));
-        restaurants.add(new LandMark(R.drawable.dejabu, "Deja Bu"));
-        restaurants.add(new LandMark(R.drawable.pergamon, "Pergamon Resturant"));
-        restaurants.add(new LandMark(R.drawable.katy, "Katy's"));
-        restaurants.add(new LandMark(R.drawable.beerbazaar, "BeerBazaar Jerusalem"));
-
-        restaurants.add(new LandMark(R.drawable.zest, "Zest Resturant"));
-        restaurants.add(new LandMark(R.drawable.snowbar, "SnowBar Garden: Pool, Resturant & Bar"));
-        restaurants.add(new LandMark(R.drawable.darna, "Darna Resturant"));
-        restaurants.add(new LandMark(R.drawable.cafelevie, "Cafe La Vie"));
-        restaurants.add(new LandMark(R.drawable.azure, "Azure Resturant"));
-        restaurants.add(new LandMark(R.drawable.bahriresturant, "Bahri Resturant"));
-        restaurants.add(new LandMark(R.drawable.lazaward, "Lazaward"));
-
-        restaurants.add(new LandMark(R.drawable.mecasa, "Me Casa Resturant"));
-        restaurants.add(new LandMark(R.drawable.limona, "Limona"));
-        restaurants.add(new LandMark(R.drawable.lowestbarintheworld, "Lowest Bar in The World"));
-        restaurants.add(new LandMark(R.drawable.cafejerico, "21Cafe Jericho"));
-        restaurants.add(new LandMark(R.drawable.moonlightrest, "Moon Light Rest House"));
-        restaurants.add(new LandMark(R.drawable.sultanaresturant, "Sultana Resturant"));
-
-        restaurants.add(new LandMark(R.drawable.alflaykat, "Mateam Alf Laylat W Laylat - Nabulus"));
-        restaurants.add(new LandMark(R.drawable.noshacafe, "Nosha Cafe"));
-        restaurants.add(new LandMark(R.drawable.burgerspace, "Burger Space"));
-        restaurants.add(new LandMark(R.drawable.alkonisweets, "Al Koni Sweets"));
-        restaurants.add(new LandMark(R.drawable.orgada, "Orgada Burgers"));
-        restaurants.add(new LandMark(R.drawable.cedarz, "Cedarz Gelato & Coffe House"));
-
-        return restaurants;
+        }
     }
-
 }
