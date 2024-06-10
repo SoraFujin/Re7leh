@@ -49,18 +49,9 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        tour = findViewById(R.id.tour_icon);
-
-        tour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, PlanTrip.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         setContentView(R.layout.activity_main);
+
+
 
         // Check if the user is a manager
         Intent externalIntent = getIntent();
@@ -114,6 +105,17 @@ public class Menu extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+        tour = findViewById(R.id.tour_icon);
+        tour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Menu.this, PlanTrip.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     private void loadItems() {

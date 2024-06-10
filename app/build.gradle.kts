@@ -48,11 +48,9 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation ("androidx.appcompat:appcompat:1.7.0")
-
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("com.github.bumptech.glide:glide:4.11.0")
     implementation ("com.android.volley:volley:1.2.1")
-
     annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
 }

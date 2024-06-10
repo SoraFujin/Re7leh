@@ -61,17 +61,13 @@
             android:exported="false" />
         <activity
             android:name=".CarActivity"
-            android:exported="true" />
-
+            android:exported="false" />
         <activity
             android:name=".RestaurantActivity"
-            android:exported="true" />
-
-
-
+            android:exported="false" />
         <activity
             android:name=".PlanTrip"
-            android:exported="false" />
+            android:exported="true" />
 
     </application>
 
