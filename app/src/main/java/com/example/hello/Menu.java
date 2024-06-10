@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,12 +41,25 @@ public class Menu extends AppCompatActivity {
     private RequestQueue requestQueue;
     private Gson gson;
     private SharedPreferences sharedPreferences;
+    private ImageView tour;
 
     static public boolean manager = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        tour = findViewById(R.id.tour_icon);
+
+        tour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Menu.this, PlanTrip.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         setContentView(R.layout.activity_main);
 
         // Check if the user is a manager
@@ -66,6 +81,7 @@ public class Menu extends AppCompatActivity {
                 finish();
             });
         }
+
 
         popularPlacesRecyclerView = findViewById(R.id.popular_places_recycler_view);
         popularPlacesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -174,4 +190,7 @@ public class Menu extends AppCompatActivity {
         }
         return false;
     }
-}
+
+    }
+
+
