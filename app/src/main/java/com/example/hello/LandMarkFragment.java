@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -171,6 +172,7 @@ public class LandMarkFragment extends Fragment {
             placeView.setOnClickListener(v -> {
                 selectedPlace = place.getName();
                 saveCityAndPlace(selectedCityName, selectedPlace);
+                Toast.makeText(getContext(), "Selected place: " + selectedPlace, Toast.LENGTH_SHORT).show();
             });
 
             placeImageView.setImageResource(place.getImageResourceId());

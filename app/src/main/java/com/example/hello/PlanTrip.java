@@ -3,7 +3,9 @@ package com.example.hello;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -15,6 +17,7 @@ public class PlanTrip extends AppCompatActivity {
     private ImageView landImageView, hotelImageView, resturantImageView, transportationImageView;
     private  FragmentManager fragmentManager = getSupportFragmentManager();
     private ArrayList<LandMark> selectedHotels;
+    private Button submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +31,28 @@ public class PlanTrip extends AppCompatActivity {
         hotelImageView = findViewById(R.id.hotel_icon);
         resturantImageView = findViewById(R.id.food_icon);
         transportationImageView = findViewById(R.id.transport_icon);
+        submit = findViewById(R.id.submitbtn);
 
-        selectedHotels = new ArrayList<>();
-        selectedHotels.add(new LandMark(R.drawable.abrahams, "Jerusalem Hotel 1"));
-        selectedHotels.add(new LandMark(R.drawable.assarayahotel, "Jerusalem Hotel 2"));
-        selectedHotels.add(new LandMark(R.drawable.bethlahemhotel, "Bethlehem Hotel 1"));
-        selectedHotels.add(new LandMark(R.drawable.grandhotelbethlahem, "Bethlehem Hotel 2"));
-        selectedHotels.add(new LandMark(R.drawable.lotushotel, "Bethlehem Hotel 2"));
-        selectedHotels.add(new LandMark(R.drawable.saintmichael, "Bethlehem Hotel 2"));
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+
+                String cityName = prefs.getString("selectedCityName", "");
+                String selectedLandmark = prefs.getString("selectedPlaceName", "");
+                String selectedHotel = prefs.getString("selectedHotelName", "");
+                String selectedRestaurant = prefs.getString("selectedRestaurantName", "");
+                String selectedTransport = prefs.getString("selectedTransport", "");
+
+                if (cityName.isEmpty() || selectedLandmark.isEmpty() || selectedHotel.isEmpty()
+                        || selectedRestaurant.isEmpty() || selectedTransport.isEmpty()) {
+
+                    Toast.makeText(PlanTrip.this, "Please select all options before submitting", Toast.LENGTH_SHORT).show();
+                }else {
+
+                }
+            }
+        });
 
         landImageView.setOnClickListener(new View.OnClickListener() {
             @Override

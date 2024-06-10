@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -56,7 +59,7 @@ public class HotelFragment extends Fragment {
 
         sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
-        TextView cityTextView = view.findViewById(R.id.CityTextView);
+        TextView cityTextView = view.findViewById(R.id.HotelTextView);
         String cityName = sharedPreferences.getString("selectedCityName", "");
         String hotels = "Hotels in: " + (cityName.isEmpty() ? "Where would you like to stay" : cityName);
         cityTextView.setText(hotels);
@@ -86,12 +89,28 @@ public class HotelFragment extends Fragment {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("selectedHotelName", hotel.getName());
                         editor.apply();
+                        Toast.makeText(getContext(), "Selected place: " + hotel.getName(), Toast.LENGTH_SHORT).show();
                     });
 
                     hotelContainer.addView(hotelView);
                 }
             }
         }
+
+        Button nextButton = view.findViewById(R.id.Nextbtn);
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getParentFragmentManager();
+
+                fragmentManager.beginTransaction()
+                        .replace(R.id.landMarkfragmentContainer, LandMarkFragment.class, null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("name")
+                        .commit();
+            }
+        });
 
         return view;
     }

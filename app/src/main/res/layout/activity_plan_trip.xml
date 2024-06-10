@@ -121,7 +121,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/submitbtn"
         android:layout_width="366dp"
         android:layout_height="54dp"
         android:text="Submit"
