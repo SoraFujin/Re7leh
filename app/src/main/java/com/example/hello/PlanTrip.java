@@ -1,5 +1,6 @@
 package com.example.hello;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -49,7 +50,9 @@ public class PlanTrip extends AppCompatActivity {
 
                     Toast.makeText(PlanTrip.this, "Please select all options before submitting", Toast.LENGTH_SHORT).show();
                 }else {
-
+                    Intent intent = new Intent(PlanTrip.this, Menu.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
