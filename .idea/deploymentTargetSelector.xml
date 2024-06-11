@@ -11,10 +11,10 @@
       <SelectionState runConfigName="Menu">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="PlanTrip">
+      <SelectionState runConfigName="Login">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="Login">
+      <SelectionState runConfigName="Management">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

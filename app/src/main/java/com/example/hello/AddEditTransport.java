@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,6 +54,38 @@ public class AddEditTransport extends AppCompatActivity {
                 Intent intent = new Intent(AddEditTransport.this, ManageTransport.class);
                 startActivity(intent);
             }
+        });
+
+        // Bottom bar
+        if (Menu.manager) {
+            ImageView managerIcon = findViewById(R.id.manager_icon);
+            managerIcon.setVisibility(View.VISIBLE);
+            managerIcon.setOnClickListener(e -> {
+                Intent newIntent = new Intent(this, Management.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+
+        ImageView homeIcon = findViewById(R.id.home_icon);
+        homeIcon.setOnClickListener(e -> {
+            Intent newIntent = new Intent(this, Menu.class);
+            startActivity(intent);
+            finish();
+        });
+
+        ImageView reminderIcon = findViewById(R.id.notification_icon);
+        reminderIcon.setOnClickListener(e -> {
+            Intent newIntent = new Intent(this, ReminderActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        ImageView favouriteIcon = findViewById(R.id.favorites_icon);
+        favouriteIcon.setOnClickListener(e -> {
+            Intent newIntent = new Intent(this, WishlistActivity.class);
+            startActivity(intent);
+            finish();
         });
 
     }

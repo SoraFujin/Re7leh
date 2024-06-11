@@ -1,14 +1,13 @@
 package com.example.hello;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,7 +21,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
+import com.example.hello.PopularPlace;
+import com.example.hello.PopularPlaceAdapter;
+import com.example.hello.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -41,20 +42,58 @@ public class Menu extends AppCompatActivity {
     private RecyclerView popularPlacesRecyclerView;
     private PopularPlaceAdapter popularPlaceAdapter;
     private List<PopularPlace> popularPlaces;
+    private List<PopularPlace> filteredPopularPlaces;
     private RequestQueue requestQueue;
     private Gson gson;
     private SharedPreferences sharedPreferences;
     private ImageView tour;
+    private EditText searchBar;  // Add this line
 
     static public boolean manager = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
+        searchBar = findViewById(R.id.search_bar);  // Initialize the search bar
 
+        popularPlacesRecyclerView = findViewById(R.id.popular_places_recycler_view);
+        popularPlacesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        popularPlaces = new ArrayList<>();
+        filteredPopularPlaces = new ArrayList<>();
+        popularPlaceAdapter = new PopularPlaceAdapter(filteredPopularPlaces, new PopularPlaceAdapter.OnFavoriteClickListener() {
+            @Override
+            public void onFavoriteClick(int position) {
+                toggleFavorite(position);
+            }
+        });
+        popularPlacesRecyclerView.setAdapter(popularPlaceAdapter);
+
+        requestQueue = Volley.newRequestQueue(this);
+        gson = new Gson();
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+        loadItems();
+
+        // Add text change listener to the search bar
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                filter(s.toString());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
 
         // Check if the user is a manager
         Intent externalIntent = getIntent();
@@ -76,37 +115,20 @@ public class Menu extends AppCompatActivity {
             });
         }
 
+        // Bottom bar
+        if (Menu.manager) {
+            ImageView managerIcon = findViewById(R.id.manager_icon);
+            managerIcon.setVisibility(View.VISIBLE);
+            managerIcon.setOnClickListener(e -> {
+                Intent intent = new Intent(this, Management.class);
+                startActivity(intent);
+                finish();
+            });
+        }
 
-        popularPlacesRecyclerView = findViewById(R.id.popular_places_recycler_view);
-        popularPlacesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-
-        popularPlaces = new ArrayList<>();
-        popularPlaceAdapter = new PopularPlaceAdapter(popularPlaces, new PopularPlaceAdapter.OnFavoriteClickListener() {
-            @Override
-            public void onFavoriteClick(int position) {
-                toggleFavorite(position);
-            }
-        });
-        popularPlacesRecyclerView.setAdapter(popularPlaceAdapter);
-
-        ImageView profilePic = findViewById(R.id.profile_picture);
-
-        profilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(Menu.this, P.class);
-                //startActivity(intent);
-            }
-        });
-        requestQueue = Volley.newRequestQueue(this);
-        gson = new Gson();
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-
-        loadItems();
-
-        ImageView hotelIcon = findViewById(R.id.hotel_icon);
-        hotelIcon.setOnClickListener(e -> {
-            Intent intent = new Intent(this, MainHotelActivity.class);
+        ImageView reminderIcon = findViewById(R.id.notification_icon);
+        reminderIcon.setOnClickListener(e -> {
+            Intent intent = new Intent(this, ReminderActivity.class);
             startActivity(intent);
             finish();
         });
@@ -117,28 +139,20 @@ public class Menu extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
 
-        tour = findViewById(R.id.tour_icon);
-
-        tour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, PlanTrip.class);
+    private void filter(String text) {
+        filteredPopularPlaces.clear();
+        if (text.isEmpty()) {
+            filteredPopularPlaces.addAll(popularPlaces);
+        } else {
+            for (PopularPlace place : popularPlaces) {
+                if (place.getName().toLowerCase().contains(text.toLowerCase())) {
+                    filteredPopularPlaces.add(place);
+                }
             }
-        });
-
-        profilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent exintent = getIntent();
-                int idUser = exintent.getIntExtra("id", 0);
-                Intent intent = new Intent(Menu.this, ProfileActivity.class);
-                intent.putExtra("id", idUser);
-                startActivity(intent);
-                finish();
-            }
-        });
-
+        }
+        popularPlaceAdapter.notifyDataSetChanged();
     }
 
     private void loadItems() {
@@ -153,12 +167,11 @@ public class Menu extends AppCompatActivity {
                                 JSONObject object = array.getJSONObject(i);
                                 String name = object.getString("name");
                                 String image = object.getString("imageURL");
-                                Log.d("image", image);
                                 PopularPlace tripPlaces = new PopularPlace(name, image);
                                 tripPlaces.setFavorite(isFavorite(name));
                                 popularPlaces.add(tripPlaces);
                             }
-                            // Notify adapter that dataset has changed
+                            filteredPopularPlaces.addAll(popularPlaces);  // Copy all items initially
                             popularPlaceAdapter.notifyDataSetChanged();
                         } catch (Exception e) {
                             Log.e("loadItems", "Error parsing JSON: " + e.getMessage());
@@ -175,9 +188,8 @@ public class Menu extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    // Toggle favorite status and update SharedPreferences
     private void toggleFavorite(int position) {
-        PopularPlace place = popularPlaces.get(position);
+        PopularPlace place = filteredPopularPlaces.get(position);
         place.setFavorite(!place.isFavorite());
         saveFavorites();
         popularPlaceAdapter.notifyItemChanged(position);
@@ -187,7 +199,6 @@ public class Menu extends AppCompatActivity {
             Toast.makeText(this, place.getName() + " Removed from wishlist.", Toast.LENGTH_SHORT).show();
     }
 
-    // Save the list of favorite places to SharedPreferences as a JSON string
     private void saveFavorites() {
         List<PopularPlace> favoritePlaces = new ArrayList<>();
         for (PopularPlace place : popularPlaces) {
@@ -201,7 +212,6 @@ public class Menu extends AppCompatActivity {
         editor.apply();
     }
 
-    // Check if the place is marked as favorite in SharedPreferences
     private boolean isFavorite(String placeName) {
         String jsonFavorites = sharedPreferences.getString(FAVORITES_KEY, null);
         if (jsonFavorites != null) {
@@ -215,7 +225,4 @@ public class Menu extends AppCompatActivity {
         }
         return false;
     }
-
-    }
-
-
+}

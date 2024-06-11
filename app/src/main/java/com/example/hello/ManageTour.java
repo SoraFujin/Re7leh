@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -53,13 +54,47 @@ public class ManageTour extends AppCompatActivity {
         getTours();
         toursAdapter = new CustomListAdapter<>(this, items);
         listView.setAdapter(toursAdapter);
+
+        // Bottom bar
+        if (Menu.manager) {
+            ImageView managerIcon = findViewById(R.id.manager_icon);
+            managerIcon.setVisibility(View.VISIBLE);
+            managerIcon.setOnClickListener(e -> {
+                Intent intent = new Intent(this, Management.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+
+        ImageView homeIcon = findViewById(R.id.home_icon);
+        homeIcon.setOnClickListener(e -> {
+            Intent intent = new Intent(this, Menu.class);
+            startActivity(intent);
+            finish();
+        });
+
+        ImageView reminderIcon = findViewById(R.id.notification_icon);
+        reminderIcon.setOnClickListener(e -> {
+            Intent intent = new Intent(this, ReminderActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        ImageView favouriteIcon = findViewById(R.id.favorites_icon);
+        favouriteIcon.setOnClickListener(e -> {
+            Intent intent = new Intent(this, WishlistActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+
     }
 
     private void getTours() {
         String url = "http://10.0.2.2/android/get_tours.php";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONArray>() {1
                     @Override
                     public void onResponse(JSONArray response) {
                         try {

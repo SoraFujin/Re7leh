@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/new_gray">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Add New"
-        android:fontFamily="@font/poppins_regular"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/main_color"
-        />
+        android:text="Reminders"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_margin="10dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
 
-    <ListView
-        android:id="@+id/listView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reminder_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/addButton"
-        android:layout_marginTop="30dp" />
+        android:padding="16dp"
+        android:layout_below="@+id/textView"
+        android:layout_above="@+id/bottom_navigation"/>
 
     <!-- Bottom Navigation Bar -->
     <LinearLayout
@@ -52,17 +51,16 @@
             android:id="@+id/notification_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/notification_unfilled_icon"
+            android:src="@drawable/notification_icon"
             android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/manager_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/manager_icon"
-            android:layout_weight="1"/>
+            android:src="@drawable/manager_unfilled_icon"
+            android:layout_weight="1"
+            android:visibility="gone"/>
     </LinearLayout>
-
-
 
 </RelativeLayout>
