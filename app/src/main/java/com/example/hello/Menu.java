@@ -129,10 +129,13 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-                Intent exintent = getIntent();
-                int idUser = exintent.getIntExtra("id", 0);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt("id", idUser);
+        Intent exintent = getIntent();
+        int idUser = exintent.getIntExtra("id", 0);
+        Log.d("NIGROS", String.valueOf(idUser));
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("id", idUser);
+        editor.apply();
+
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -55,6 +55,7 @@ public class PlanTrip extends AppCompatActivity {
 
                 SharedPreferences pref2 = getSharedPreferences("MyFavorites", MODE_PRIVATE);
                 int userID = pref2.getInt("id", 0);
+                Log.d("NIGROS2", String.valueOf(userID));
 
                 String cityName = prefs.getString("selectedCityName", "");
                 int cityID = prefs.getInt("cityID", 0);
@@ -70,6 +71,7 @@ public class PlanTrip extends AppCompatActivity {
                 int restaurantID = prefs.getInt("restaurantID", 0);
 
                 String selectedTransport = prefs.getString("selectedTransport", "");
+                int carID = prefs.getInt("carID", 0);
 
 
                 if (cityName.isEmpty() || selectedLandmark.isEmpty() || selectedHotel.isEmpty()
@@ -78,7 +80,7 @@ public class PlanTrip extends AppCompatActivity {
                     Toast.makeText(PlanTrip.this, "Please select all options before submitting", Toast.LENGTH_SHORT).show();
                 }else {
                     reservationNew(cityName, cityID,selectedLandmark, landmarkID, selectedHotel, hotelID, selectedRestaurant, restaurantID,
-                            selectedTransport, userID);
+                            selectedTransport, carID, userID);
 
                     Intent intent = new Intent(PlanTrip.this, Menu.class);
                     startActivity(intent);
@@ -137,7 +139,18 @@ public class PlanTrip extends AppCompatActivity {
 
     }
     private void reservationNew(String cityName, int cityID, String placeName, int placeID, String hotelName, int hotelID
-            ,String restaurantName, int restaurantID, String carName, int userID){
+            ,String restaurantName, int restaurantID, String carName, int carID, int userID){
+        Log.d("cityName", cityName);
+        Log.d("cityID", String.valueOf(cityID));
+        Log.d("placeName", placeName);
+        Log.d("placeID", String.valueOf(placeID));
+        Log.d("hotelName", hotelName);
+        Log.d("hotelID", String.valueOf(hotelID));
+        Log.d("restaurantName", restaurantName);
+        Log.d("restaurantID", String.valueOf(restaurantID));
+        Log.d("carName", carName);
+        Log.d("carID", String.valueOf(carID));
+        Log.d("userID", String.valueOf(userID));
         String url = "http://10.0.2.2/android/add_reservation.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -180,7 +193,8 @@ public class PlanTrip extends AppCompatActivity {
                 params.put("resturant_name", restaurantName);
                 params.put("restaurant_id", String.valueOf(restaurantID));
                 params.put("car_name",carName);
-                params.put("userID", String.valueOf(userID));
+                params.put("car_id", String.valueOf(carID));
+                params.put("user_id", String.valueOf(userID));
 
                 // at last we are returning our params.
                 return params;

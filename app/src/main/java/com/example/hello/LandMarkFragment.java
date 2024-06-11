@@ -124,6 +124,7 @@ public class LandMarkFragment extends Fragment {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             int cityID = jsonObject.getInt("cityID");
+            Log.d("cityIDDD", String.valueOf(cityID));
 
             String cityName = jsonObject.getString("cityName");
             String cityImagePath = jsonObject.getString("cityImagePath");
@@ -191,8 +192,8 @@ public class LandMarkFragment extends Fragment {
     private void saveSelectedCity(City city) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("selectedCityName", city.getCityName());
-        editor.apply();
         editor.putInt("cityID", city.getCityID());
+        editor.apply();
 
     }
 
