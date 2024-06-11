@@ -67,14 +67,15 @@ public class Login extends AppCompatActivity {
                         String check = "";
                         try {
                             check= response.getString("answer");
+                            if(check.equals("yes")){
+                                Intent intent = new Intent(Login.this, Menu.class);
+                                intent.putExtra("id", response.getInt("id"));
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(Login.this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
+                            }
                         } catch (JSONException exception) {
                             Log.d("Error", exception.toString());
-                        }
-                        if(check.equals("yes")){
-                            Intent intent = new Intent(Login.this, Management.class);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(Login.this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
                         }
                     }
                 }, new Response.ErrorListener() {
