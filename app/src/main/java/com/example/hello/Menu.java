@@ -124,6 +124,8 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Menu.this, PlanTrip.class);
+                startActivity(intent);
+                finish();
             }
         });
 

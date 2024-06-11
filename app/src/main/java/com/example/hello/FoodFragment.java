@@ -147,9 +147,24 @@ public class FoodFragment extends Fragment {
                 Glide.with(this).load(restaurant.getImageUrl()).into(restaurantImageView);
                 TextView restaurantNameTextView = restaurantView.findViewById(R.id.resturantNameTextView);
                 restaurantNameTextView.setText(restaurant.getName());
+                restaurantView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        saveSelectedRestaurantName(restaurant.getName());
+                        Toast.makeText(getContext(), "Selected: " + restaurant.getName(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 restaurantContainer.addView(restaurantView);
             }
-
         }
     }
+
+    private void saveSelectedRestaurantName(String restaurantName) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("SelectedRestaurantName", restaurantName);
+        editor.apply();
+    }
 }
+
+

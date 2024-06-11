@@ -178,7 +178,11 @@ public class LandMarkFragment extends Fragment {
             Glide.with(this).load(landmark.getImageUrl()).into(placeImageView);
             placeTextView.setText(landmark.getName());
 
-            placeView.setOnClickListener(v -> saveSelectedLandmark(landmark));
+            placeView.setOnClickListener(v -> {
+                saveSelectedLandmark(landmark);
+                Toast.makeText(getContext(), "Selected: " + landmark.getName(), Toast.LENGTH_SHORT).show();
+                    }
+            );
             placeContainer.addView(placeView);
         }
     }
