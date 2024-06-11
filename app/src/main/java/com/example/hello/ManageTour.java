@@ -94,7 +94,7 @@ public class ManageTour extends AppCompatActivity {
         String url = "http://10.0.2.2/android/get_tours.php";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {1
+                new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
