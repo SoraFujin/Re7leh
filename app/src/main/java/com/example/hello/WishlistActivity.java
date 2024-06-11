@@ -31,6 +31,16 @@ public class WishlistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
 
+
+
+        // Initialize RecyclerView
+        wishlistRecyclerView = findViewById(R.id.reminder_recycler_view);
+        wishlistRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Load favorite places from SharedPreferences
+        loadFavorites();
+
+        // Bottom bar
         if (Menu.manager) {
             ImageView managerIcon = findViewById(R.id.manager_icon);
             managerIcon.setVisibility(View.VISIBLE);
@@ -41,17 +51,16 @@ public class WishlistActivity extends AppCompatActivity {
             });
         }
 
-        // Initialize RecyclerView
-        wishlistRecyclerView = findViewById(R.id.wishlist_recycler_view);
-        wishlistRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Load favorite places from SharedPreferences
-        loadFavorites();
-
-        // Bottom bar
         ImageView homeIcon = findViewById(R.id.home_icon);
         homeIcon.setOnClickListener(e -> {
             Intent intent = new Intent(this, Menu.class);
+            startActivity(intent);
+            finish();
+        });
+
+        ImageView reminderIcon = findViewById(R.id.notification_icon);
+        reminderIcon.setOnClickListener(e -> {
+            Intent intent = new Intent(this, ReminderActivity.class);
             startActivity(intent);
             finish();
         });

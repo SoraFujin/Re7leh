@@ -41,8 +41,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Change"
+                    android:textColor="@color/white"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/black"/>
+                    android:fontFamily="@font/poppins_regular"
+                    android:backgroundTint="@color/new_gray" />
             </LinearLayout>
 
             <!-- Username -->
@@ -68,8 +70,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Change"
+                    android:textColor="@color/white"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/black"/>
+                    android:fontFamily="@font/poppins_regular"
+                    android:backgroundTint="@color/new_gray"
+                    />
             </LinearLayout>
 
             <!-- Password -->
@@ -96,7 +101,9 @@
                     android:layout_height="wrap_content"
                     android:text="Change"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/black"/>
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_bold"
+                    android:backgroundTint="@color/new_gray"/>
             </LinearLayout>
 
             <!-- Email -->
@@ -122,8 +129,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Change"
+                    android:textColor="@color/white"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/black"/>
+                    android:fontFamily="@font/poppins_bold"
+                    android:backgroundTint="@color/new_gray" />
             </LinearLayout>
 
             <!-- Sign Out and Delete Account Section -->
@@ -140,7 +149,8 @@
                     android:layout_height="wrap_content"
                     android:text="Sign Out"
                     android:layout_marginEnd="16dp"
-                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/poppins_bold"
+                    android:backgroundTint="@color/new_gray"
                     android:textColor="@color/white"/>
 
                 <Button
@@ -148,7 +158,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Delete Account"
-                    android:backgroundTint="@color/black"
+                    android:fontFamily="@font/poppins_bold"
+                    android:backgroundTint="@color/new_gray"
                     android:textColor="@color/white"/>
             </LinearLayout>
 
@@ -186,6 +197,14 @@
             android:layout_height="30dp"
             android:src="@drawable/notification_icon"
             android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/manager_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/manager_icon"
+            android:layout_weight="1"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </FrameLayout>

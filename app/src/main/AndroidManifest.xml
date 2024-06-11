@@ -31,7 +31,7 @@
             android:exported="false" />
         <activity
             android:name=".MainHotelActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Management"
             android:exported="false" />
@@ -67,7 +67,7 @@
             android:exported="false" />
         <activity
             android:name=".PlanTrip"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
