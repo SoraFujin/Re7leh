@@ -71,7 +71,9 @@ public class Login extends AppCompatActivity {
                                 Intent intent = new Intent(Login.this, Menu.class);
                                 if(response.has("permission")) {
                                     try {
+                                        int idUser = response.getInt("id");
                                         intent.putExtra("permission", response.getString("permission"));
+                                        intent.putExtra("id", idUser);
                                     } catch (JSONException e) {
                                         throw new RuntimeException(e);
                                     }
@@ -83,12 +85,7 @@ public class Login extends AppCompatActivity {
                             }
                         } catch (JSONException exception) {
                             Log.d("Error", exception.toString());
-                        }
-                        if(check.equals("yes")){
-                            Intent intent = new Intent(Login.this, Menu.class);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(Login.this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.this, "Error parsing response", Toast.LENGTH_LONG).show();
                         }
                     }
 

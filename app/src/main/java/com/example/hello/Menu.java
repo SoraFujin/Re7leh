@@ -119,10 +119,21 @@ public class Menu extends AppCompatActivity {
         });
 
         tour = findViewById(R.id.tour_icon);
+
         tour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Menu.this, PlanTrip.class);
+            }
+        });
+
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent exintent = getIntent();
+                int idUser = exintent.getIntExtra("id", 0);
+                Intent intent = new Intent(Menu.this, ProfileActivity.class);
+                intent.putExtra("id", idUser);
                 startActivity(intent);
                 finish();
             }

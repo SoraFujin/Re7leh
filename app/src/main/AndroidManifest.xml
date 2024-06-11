@@ -68,7 +68,12 @@
         <activity
             android:name=".PlanTrip"
             android:exported="true" />
-
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChangeUserInfo"
+            android:exported="false" />
     </application>
 
 
