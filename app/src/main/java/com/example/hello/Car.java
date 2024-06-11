@@ -1,16 +1,26 @@
 package com.example.hello;
 
 public class Car {
+    private int id;
     private String type;
     private String description;
     private double price;
     private String imageUrl;
 
-    public Car(String type, String description, double price, String imageUrl) {
+    public Car(int id, String type, String description, double price, String imageUrl) {
+        this.id = id;
         this.type = type;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getType() {

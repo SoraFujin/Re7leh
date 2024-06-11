@@ -61,10 +61,10 @@
             android:exported="false" />
         <activity
             android:name=".CarActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".RestaurantActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".PlanTrip"
             android:exported="false" />
@@ -80,6 +80,12 @@
         <activity
             android:name=".BookingDetailsActivity"
             android:exported="false" />
+        <activity
+            android:name=".RestaurantBooking"
+            android:exported="true" />
+        <activity
+            android:name=".CarBooking"
+            android:exported="true" />
     </application>
 
 </manifest>
