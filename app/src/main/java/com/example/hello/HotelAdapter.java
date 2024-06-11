@@ -2,6 +2,7 @@ package com.example.hello;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,14 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         holder.nameTextView.setText(hotel.getName());
         holder.locationTextView.setText(hotel.getLocation());
         Glide.with(context).load(hotel.getImageUrl()).into(holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HotelReservation.class);
+                intent.putExtra("hotelId", hotel.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

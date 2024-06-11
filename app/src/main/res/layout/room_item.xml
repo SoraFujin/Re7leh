@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+android:layout_gravity="center"
+        android:layout_width="wrap_content"
+            android:text="Hotel Penselvania"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/main_color"
+        android:textSize="25dp"
+        android:layout_height="match_parent"
+        />
+
+    <ImageView
+        android:id="@+id/roomImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/roomTypeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/main_color"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/roomDescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/roomPriceTextView"
+        android:layout_width="match_parent"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/bookNowButton"
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/main_color"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Book Now" />
+
+</LinearLayout>
