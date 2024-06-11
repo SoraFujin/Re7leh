@@ -124,6 +124,7 @@ public class LandMarkFragment extends Fragment {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             int cityID = jsonObject.getInt("cityID");
+
             String cityName = jsonObject.getString("cityName");
             String cityImagePath = jsonObject.getString("cityImagePath");
 
@@ -136,10 +137,10 @@ public class LandMarkFragment extends Fragment {
                 String placeName = landmarkObject.getString("place_name");
                 String imagePath = landmarkObject.getString("image_path");
 
-                landmarks.add(new LandMark(imagePath, placeName));
+                landmarks.add(new LandMark(imagePath, placeName, landmarkID));
             }
 
-            cityList.add(new City(cityImagePath, cityName, landmarks));
+            cityList.add(new City(cityImagePath, cityName, landmarks, cityID));
         }
 
         populateCityScrollView();
@@ -191,11 +192,14 @@ public class LandMarkFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("selectedCityName", city.getCityName());
         editor.apply();
+        editor.putInt("cityID", city.getCityID());
+
     }
 
     private void saveSelectedLandmark(LandMark landmark) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("selectedPlaceName", landmark.getName());
+        editor.putInt("placeID", landmark.getPlaceID());
         editor.apply();
     }
 }

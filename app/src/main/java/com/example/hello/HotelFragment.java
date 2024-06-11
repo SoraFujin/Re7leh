@@ -39,6 +39,7 @@ public class HotelFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String url = "http://10.0.2.2/android/getHotels.php";
+    private int hotelId;
 
     public HotelFragment() {
         // Required empty public constructor
@@ -119,6 +120,7 @@ public class HotelFragment extends Fragment {
         selectedHotels = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
+            hotelId = jsonObject.optInt("hotelId", 0);
             String hotelName = jsonObject.optString("name", "");
             String hotelImage = jsonObject.optString("imageUrl", "");
             String cityName = jsonObject.optString("cityName", "");
@@ -158,6 +160,7 @@ public class HotelFragment extends Fragment {
         if (sharedPreferences != null) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("SelectedHotelName", hotelName);
+            editor.putInt("hotelID", hotelId);
             editor.apply();
         } else {
             Log.e("HotelFragment", "SharedPreferences is not initialized");

@@ -42,6 +42,7 @@ public class FoodFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private String url = "http://10.0.2.2/android/getResturants.php";
+    private int restaurantID;
 
     public FoodFragment() {
         // Required empty public constructor
@@ -116,6 +117,7 @@ public class FoodFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+
                         Toast.makeText(getContext(), "Error fetching data", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -127,9 +129,10 @@ public class FoodFragment extends Fragment {
         selectedRestaurants = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            String restaurantName = jsonObject.getString("name");
-            String imageUrl = jsonObject.getString("imageUrl");
-            String cityName = jsonObject.getString("cityName");
+            restaurantID = jsonObject.getInt("ID");
+            String restaurantName = jsonObject.getString("Name");
+            String imageUrl = jsonObject.getString("image_name");
+            String cityName = jsonObject.getString("location");
 
             selectedRestaurants.add(new LandMark(imageUrl, restaurantName, cityName));
         }
@@ -163,6 +166,7 @@ public class FoodFragment extends Fragment {
     private void saveSelectedRestaurantName(String restaurantName) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("SelectedRestaurantName", restaurantName);
+        editor.putInt("restaurantID", restaurantID);
         editor.apply();
     }
 }

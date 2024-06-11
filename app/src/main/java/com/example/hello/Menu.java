@@ -129,11 +129,13 @@ public class Menu extends AppCompatActivity {
             }
         });
 
+                Intent exintent = getIntent();
+                int idUser = exintent.getIntExtra("id", 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("id", idUser);
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent exintent = getIntent();
-                int idUser = exintent.getIntExtra("id", 0);
                 Intent intent = new Intent(Menu.this, ProfileActivity.class);
                 intent.putExtra("id", idUser);
                 startActivity(intent);
