@@ -2,6 +2,7 @@ package com.example.hello;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -64,7 +65,7 @@ public class MainHotelActivity extends AppCompatActivity {
     }
 
     private void fetchHotels(String location) {
-        String url = "http://10.0.2.2/travelApp/get_hotels.php?location=" + location;
+        String url = "http://10.0.2.2/travelApp/get_hotelsss.php?location=" + location;
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
