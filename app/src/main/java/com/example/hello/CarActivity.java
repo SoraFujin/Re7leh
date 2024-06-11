@@ -51,12 +51,13 @@ public class CarActivity extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
+                        int id = jsonObject.getInt("id");
                         String type = jsonObject.getString("type");
                         String description = jsonObject.getString("description");
                         double price = jsonObject.getDouble("price");
                         String imageUrl = jsonObject.getString("image_url");
 
-                        Car car = new Car(type, description, price, imageUrl);
+                        Car car = new Car(id, type, description, price, imageUrl);
                         carList.add(car);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -71,7 +72,7 @@ public class CarActivity extends AppCompatActivity {
 
                     }
                 });
-                RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
     }
 
