@@ -50,7 +50,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-    }//e
+    }
 
     private void canLogin(String username, String pass) {
         String url = "http://10.0.2.2/android/canLoggin.php?username=" + username + "&pass=" + pass;
@@ -66,7 +66,21 @@ public class Login extends AppCompatActivity {
                         Log.d("Response", response.toString());
                         String check = "";
                         try {
-                            check= response.getString("answer");
+                            check = response.getString("answer");
+                            if(check.equals("yes")){
+                                Intent intent = new Intent(Login.this, Menu.class);
+                                if(response.has("permission")) {
+                                    try {
+                                        intent.putExtra("permission", response.getString("permission"));
+                                    } catch (JSONException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(Login.this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
+                            }
                         } catch (JSONException exception) {
                             Log.d("Error", exception.toString());
                         }
@@ -77,6 +91,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this, "Username or password is incorrect", Toast.LENGTH_LONG).show();
                         }
                     }
+
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {

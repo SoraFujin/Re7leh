@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,6 +31,16 @@ public class WishlistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
 
+        if (Menu.manager) {
+            ImageView managerIcon = findViewById(R.id.manager_icon);
+            managerIcon.setVisibility(View.VISIBLE);
+            managerIcon.setOnClickListener(e -> {
+                Intent intent = new Intent(this, Management.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+
         // Initialize RecyclerView
         wishlistRecyclerView = findViewById(R.id.wishlist_recycler_view);
         wishlistRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -42,6 +53,7 @@ public class WishlistActivity extends AppCompatActivity {
         homeIcon.setOnClickListener(e -> {
             Intent intent = new Intent(this, Menu.class);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -68,7 +80,7 @@ public class WishlistActivity extends AppCompatActivity {
     }
 
     // Method to remove favorite from the list and SharedPreferences
-    private void removeFavorite(int position) {
+    private void removeFavorite(int position) { try {
         PopularPlace place = wishlistPlaces.get(position);
         place.setFavorite(false); // Update the favorite status
         wishlistPlaces.remove(position); // Remove from the list
@@ -83,5 +95,22 @@ public class WishlistActivity extends AppCompatActivity {
         // Notify adapter about item removal
         wishlistAdapter.notifyItemRemoved(position);
         Toast.makeText(this, place.getName() + " Removed from wishlist.", Toast.LENGTH_SHORT).show();
+    } catch (Exception e) {
+        PopularPlace place = wishlistPlaces.get(0);
+        place.setFavorite(false); // Update the favorite status
+        wishlistPlaces.remove(0); // Remove from the list
+
+        // Update SharedPreferences
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        String jsonFavorites = new Gson().toJson(wishlistPlaces);
+        editor.putString(FAVORITES_KEY, jsonFavorites);
+        editor.apply();
+
+        // Notify adapter about item removal
+        wishlistAdapter.notifyItemRemoved(position);
+        Toast.makeText(this, place.getName() + " Removed from wishlist.", Toast.LENGTH_SHORT).show();
+    }
+
     }
 }

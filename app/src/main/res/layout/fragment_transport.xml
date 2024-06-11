@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TransportFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="vertical">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_color"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/transportTextView"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="How would you like to travel"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_extrabold"
+        android:gravity="center"
+        android:textSize="20dp"/>
+
+        <Button
+            android:id="@+id/Nextbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:textColor="@color/main_color"
+            android:backgroundTint="@color/black"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/TaxiCardView"
+        android:layout_width="2in"
+        android:layout_height="1in"
+        android:background="@color/main_color">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/taxi"
+            android:background="@color/main_color"/>
+        <TextView
+            android:id="@+id/TaxiTextView"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Taxi"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_extrabold"
+            android:gravity="center"
+            android:textSize="20dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/BusCardView"
+            android:layout_width="2in"
+            android:layout_height="1in"
+            android:background="@color/main_color">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bus"
+                android:background="@color/main_color"/>
+
+            <TextView
+                android:id="@+id/BusTextView"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Bus"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_extrabold"
+                android:gravity="center"
+                android:textSize="20dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/UberCardView"
+            android:layout_width="2in"
+            android:layout_height="1in"
+            android:background="@color/main_color">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/uber"
+                android:background="@color/main_color"/>
+            <TextView
+                android:id="@+id/UberTextView"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Uber"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_extrabold"
+                android:gravity="center"
+                android:textSize="20dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"/>
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+</FrameLayout>
