@@ -56,7 +56,6 @@ public class ManageTour extends AppCompatActivity {
         listView.setAdapter(toursAdapter);
 
         // Bottom bar
-        if (Menu.manager) {
             ImageView managerIcon = findViewById(R.id.manager_icon);
             managerIcon.setVisibility(View.VISIBLE);
             managerIcon.setOnClickListener(e -> {
@@ -64,7 +63,6 @@ public class ManageTour extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             });
-        }
 
         ImageView homeIcon = findViewById(R.id.home_icon);
         homeIcon.setOnClickListener(e -> {

@@ -113,6 +113,7 @@ public class TransportFragment extends Fragment {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject transportObject = jsonArray.getJSONObject(i);
             transportationID = transportObject.getInt("id");
+            Log.d("aaassss", String.valueOf(transportationID));
             String transportName = transportObject.getString("type");
             String imageResourceId = transportObject.getString("image_url");
 
@@ -125,11 +126,8 @@ public class TransportFragment extends Fragment {
         View transportItemView = LayoutInflater.from(getContext()).inflate(R.layout.item_transportation, transportContainer, false);
         TextView transportItemTextView = transportItemView.findViewById(R.id.transportNameTextView);
         ImageView transportItemImageView = transportItemView.findViewById(R.id.transportImageView);
-
-        // Set text
         transportItemTextView.setText(transportName);
         Glide.with(this).load(imageResourceId).into(transportItemImageView);
-
         transportItemView.setOnClickListener(v -> {
             saveSelectedTransport(transportName);
             Toast.makeText(getContext(), "Selected transport: " + transportName, Toast.LENGTH_SHORT).show();
@@ -143,6 +141,7 @@ public class TransportFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("selectedTransport", transportName);
         editor.putInt("carID", transportationID);
+        Log.d("aaasss", String.valueOf(transportationID));
         editor.apply();
     }
 }

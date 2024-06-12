@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu extends AppCompatActivity {
+    private ImageView hotelIcon, foodIcon, transportIcon;
 
     private static final String PREFS_NAME = "MyFavorites";
     private static final String FAVORITES_KEY = "FavoritePlaces";
@@ -56,7 +57,38 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        searchBar = findViewById(R.id.search_bar);  // Initialize the search bar
+        searchBar = findViewById(R.id.search_bar);
+
+        hotelIcon = findViewById(R.id.hotel_icon);
+        hotelIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Menu.this, MainHotelActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+        foodIcon = findViewById(R.id.food_icon);
+        foodIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Menu.this, RestaurantActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        transportIcon = findViewById(R.id.transportation_icon);
+        transportIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Menu.this, CarActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         ImageView profilePic = findViewById(R.id.profile_picture);
 
@@ -154,7 +186,7 @@ public class Menu extends AppCompatActivity {
 
         Intent exintent = getIntent();
         int idUser = exintent.getIntExtra("id", 0);
-        Log.d("NIGGER", idUser + "");
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("id", idUser);
         editor.apply();

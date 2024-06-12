@@ -1,9 +1,11 @@
 package com.example.hello;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
@@ -22,14 +24,34 @@ import org.json.JSONObject;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Login extends AppCompatActivity {
+    private static final String PREFS_NAME = "LoginPrefs";
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_PASSWORD = "password";
+    private static final String KEY_REMEMBER_ME = "rememberMe";
+
     private RequestQueue queue;
+    private EditText userName;
+    private EditText passWord;
+    private CheckBox rememberMeCheckBox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText username = findViewById(R.id.username);
-        final EditText password = findViewById(R.id.password);
+        userName = findViewById(R.id.username);
+        passWord = findViewById(R.id.password);
+        rememberMeCheckBox = findViewById(R.id.rememberMeCheckBox);
+
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean rememberMe = preferences.getBoolean(KEY_REMEMBER_ME, false);
+        if (rememberMe) {
+            String savedUsername = preferences.getString(KEY_USERNAME, "");
+            String savedPassword = preferences.getString(KEY_PASSWORD, "");
+            userName.setText(savedUsername);
+            passWord.setText(savedPassword);
+            rememberMeCheckBox.setChecked(true);
+        }
 
         TextView textViewSignUp = findViewById(R.id.signuptext);
         textViewSignUp.setOnClickListener(new View.OnClickListener() {
@@ -44,12 +66,27 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user = username.getText().toString();
-                String pass = password.getText().toString();
-                canLogin(user, pass);
+                String username = userName.getText().toString();
+                String password = passWord.getText().toString();
+                boolean rememberMe = rememberMeCheckBox.isChecked();
+
+                // Save login credentials if "Remember Me" is checked
+                SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                if (rememberMe) {
+                    editor.putString(KEY_USERNAME, username);
+                    editor.putString(KEY_PASSWORD, password);
+                    editor.putBoolean(KEY_REMEMBER_ME, true);
+                } else {
+                    editor.remove(KEY_USERNAME);
+                    editor.remove(KEY_PASSWORD);
+                    editor.remove(KEY_REMEMBER_ME);
+                }
+                editor.apply();
+
+                canLogin(username, password);
             }
         });
-
     }
 
     private void canLogin(String username, String pass) {
@@ -72,7 +109,6 @@ public class Login extends AppCompatActivity {
                                 if(response.has("permission")) {
                                     try {
                                         int idUser = response.getInt("id");
-                                        Log.d("NIGRO", String.valueOf(idUser));
                                         intent.putExtra("permission", response.getString("permission"));
                                         intent.putExtra("id", idUser);
                                     } catch (JSONException e) {

@@ -32,8 +32,6 @@ public class PlanTrip extends AppCompatActivity {
     private ArrayList<LandMark> selectedHotels;
     private Button submit;
 
-    //TODO onStop method to delete the old data if the user exits
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +60,14 @@ public class PlanTrip extends AppCompatActivity {
                 String selectedLandmark = prefs.getString("selectedPlaceName", "");
                 int landmarkID = prefs.getInt("placeID", 0);
 
-                String selectedHotel = prefs.getString("selectedHotelName", "");
+                String selectedHotel = prefs.getString("SelectedHotelName", "");
                 int hotelID = prefs.getInt("hotelID", 0);
 
 
-                String selectedRestaurant = prefs.getString("selectedRestaurantName", "");
+
+                String selectedRestaurant = prefs.getString("SelectedRestaurantName", "");
                 int restaurantID = prefs.getInt("restaurantID", 0);
+                Log.d("aaa", String.valueOf(restaurantID));
 
                 String selectedTransport = prefs.getString("selectedTransport", "");
                 int carID = prefs.getInt("carID", 0);
@@ -78,7 +78,7 @@ public class PlanTrip extends AppCompatActivity {
 
                     Toast.makeText(PlanTrip.this, "Please select all options before submitting", Toast.LENGTH_SHORT).show();
                 }else {
-                    reservationNew(cityName, cityID,selectedLandmark, landmarkID, selectedHotel, hotelID, selectedRestaurant, restaurantID,
+                    reservationNew(cityName, cityID, selectedLandmark, landmarkID, selectedHotel, hotelID, selectedRestaurant, restaurantID,
                             selectedTransport, carID, userID);
 
                     Intent intent = new Intent(PlanTrip.this, Menu.class);
@@ -105,7 +105,8 @@ public class PlanTrip extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fragmentManager.beginTransaction()
-                        .replace(R.id.landMarkfragmentContainer, HotelFragment.class, null).setReorderingAllowed(true)
+                        .replace(R.id.landMarkfragmentContainer, HotelFragment.class, null)
+                        .setReorderingAllowed(true)
                         .addToBackStack("name")
                         .commit();
 

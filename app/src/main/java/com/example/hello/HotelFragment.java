@@ -122,6 +122,7 @@ public class HotelFragment extends Fragment {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             hotelId = jsonObject.optInt("hotelId", 0);
             String hotelName = jsonObject.optString("name", "");
+            Log.d("hhhhhhh", hotelName);
             String hotelImage = jsonObject.optString("imageUrl", "");
             String cityName = jsonObject.optString("cityName", "");
             selectedHotels.add(new LandMark(hotelImage, hotelName, cityName));
@@ -145,6 +146,7 @@ public class HotelFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             saveSelectedHotelName(hotel.getName());
+                            Log.d("hhhhhhhs", hotel.getName());
                             Toast.makeText(getContext(), "Selected: " + hotel.getName(), Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -160,6 +162,7 @@ public class HotelFragment extends Fragment {
         if (sharedPreferences != null) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("SelectedHotelName", hotelName);
+            Log.d("hhhhhhhsa", hotelName);
             editor.putInt("hotelID", hotelId);
             editor.apply();
         } else {

@@ -22,33 +22,77 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/typeTextView"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:textColor="@color/orange"/>
 
     <TextView
-        android:id="@+id/costTextView"
+        android:id="@+id/descriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/typeEditText"
         android:layout_marginStart="16dp"
-        android:text="Cost Per KM"
+        android:text="Price"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:layout_marginTop="30dp"/>
 
     <EditText
-        android:id="@+id/costEditText"
+        android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/typeEditText"
-        android:layout_toRightOf="@id/costTextView"
+        android:layout_toRightOf="@id/descriptionTextView"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/orange"/>
+
+    <TextView
+        android:id="@+id/priceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descriptionEditText"
+        android:layout_marginStart="16dp"
+        android:text="Price"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/white"
         android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/priceEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/descriptionEditText"
+        android:layout_toRightOf="@id/priceTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/orange"/>
+
+    <TextView
+        android:id="@+id/imageUrlTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/priceEditText"
+        android:layout_marginStart="16dp"
+        android:text="Price"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/imageUrlEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/priceEditText"
+        android:layout_toRightOf="@id/imageUrlTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/orange"/>
 
     <Button
         android:id="@+id/executeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/costEditText"
+        android:layout_below="@id/imageUrlEditText"
         android:layout_marginTop="25dp"
         android:text="Execute"
         android:fontFamily="@font/poppins_regular"

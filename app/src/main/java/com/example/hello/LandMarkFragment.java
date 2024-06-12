@@ -124,8 +124,6 @@ public class LandMarkFragment extends Fragment {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             int cityID = jsonObject.getInt("cityID");
-            Log.d("cityIDDD", String.valueOf(cityID));
-
             String cityName = jsonObject.getString("cityName");
             String cityImagePath = jsonObject.getString("cityImagePath");
 
