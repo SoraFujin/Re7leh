@@ -125,11 +125,8 @@ public class TransportFragment extends Fragment {
         View transportItemView = LayoutInflater.from(getContext()).inflate(R.layout.item_transportation, transportContainer, false);
         TextView transportItemTextView = transportItemView.findViewById(R.id.transportNameTextView);
         ImageView transportItemImageView = transportItemView.findViewById(R.id.transportImageView);
-
-        // Set text
         transportItemTextView.setText(transportName);
         Glide.with(this).load(imageResourceId).into(transportItemImageView);
-
         transportItemView.setOnClickListener(v -> {
             saveSelectedTransport(transportName);
             Toast.makeText(getContext(), "Selected transport: " + transportName, Toast.LENGTH_SHORT).show();

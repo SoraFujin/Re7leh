@@ -109,7 +109,6 @@ public class Login extends AppCompatActivity {
                                 if(response.has("permission")) {
                                     try {
                                         int idUser = response.getInt("id");
-                                        Log.d("NIGRO", String.valueOf(idUser));
                                         intent.putExtra("permission", response.getString("permission"));
                                         intent.putExtra("id", idUser);
                                     } catch (JSONException e) {
