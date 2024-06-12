@@ -131,6 +131,7 @@ public class FoodFragment extends Fragment {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             restaurantID = jsonObject.getInt("ID");
             String restaurantName = jsonObject.getString("Name");
+            Log.d("aaasss", restaurantName);
             String imageUrl = jsonObject.getString("image_name");
             String cityName = jsonObject.getString("location");
 
@@ -154,6 +155,7 @@ public class FoodFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         saveSelectedRestaurantName(restaurant.getName());
+                        Log.d("aaasssa", restaurant.getName());
                         Toast.makeText(getContext(), "Selected: " + restaurant.getName(), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -166,6 +168,7 @@ public class FoodFragment extends Fragment {
     private void saveSelectedRestaurantName(String restaurantName) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("SelectedRestaurantName", restaurantName);
+        Log.d("aaasssad", restaurantName);
         editor.putInt("restaurantID", restaurantID);
         editor.apply();
     }

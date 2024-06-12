@@ -113,6 +113,7 @@ public class TransportFragment extends Fragment {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject transportObject = jsonArray.getJSONObject(i);
             transportationID = transportObject.getInt("id");
+            Log.d("aaassss", String.valueOf(transportationID));
             String transportName = transportObject.getString("type");
             String imageResourceId = transportObject.getString("image_url");
 
@@ -140,6 +141,7 @@ public class TransportFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("selectedTransport", transportName);
         editor.putInt("carID", transportationID);
+        Log.d("aaasss", String.valueOf(transportationID));
         editor.apply();
     }
 }
