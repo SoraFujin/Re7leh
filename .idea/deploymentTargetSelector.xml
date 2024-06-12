@@ -6,6 +6,7 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
       <SelectionState runConfigName="PlanTrip">
@@ -26,6 +27,8 @@
       </SelectionState>
 >>>>>>> bugFixes
 >>>>>>> a96a4313128876b2fec3a8c7daf6df6e1bb6e498
+=======
+>>>>>>> c3a14b6319cbec9b81c70f979f959d2149a0b473
     </selectionStates>
   </component>
 </project>
