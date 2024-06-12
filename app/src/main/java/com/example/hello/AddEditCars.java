@@ -19,45 +19,55 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddEditTransport extends AppCompatActivity {
+public class AddEditCars extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.addedittransport);
+        setContentView(R.layout.addeditcars);
 
         EditText type = findViewById(R.id.typeEditText);
-        EditText cost = findViewById(R.id.costEditText);
+        EditText description = findViewById(R.id.descriptionEditText);
+        EditText price = findViewById(R.id.priceEditText);
+        EditText imageUrl = findViewById(R.id.imageUrlEditText);
 
         Button execute = findViewById(R.id.executeButton);
         Intent intent = getIntent();
         int op = intent.getIntExtra("op", 0);
+        int idObject = intent.getIntExtra("id",0);
         String typeObject = intent.getStringExtra("type");
-        float costObject = intent.getFloatExtra("cost", 0.0f);
+        String descriptionObject = intent.getStringExtra("description");
+        double priceObject = intent.getDoubleExtra("price",0);
+        String imageUrlObject = intent.getStringExtra("imageUrl");
 
         if(op == 1){
             type.setText(typeObject);
-            type.setEnabled(false);
-            cost.setText(String.valueOf(costObject));
+            description.setText(descriptionObject);
+            price.setText(String.valueOf(priceObject));
+            imageUrl.setText(imageUrlObject);
         }
         execute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(op == 0){
                     String typeObject2 = type.getText().toString();
-                    float costObject2 = Float.parseFloat(cost.getText().toString());
-                    addTransport(typeObject2,costObject2);
+                    String descriptionObject2 = description.getText().toString();
+                    float costObject2 = Float.parseFloat(price.getText().toString());
+                    String imageUrlObject2 = imageUrl.getText().toString();
+                    addCars(typeObject2,descriptionObject2,costObject2,imageUrlObject2);
                 }else{
-                    float costObject2 = Float.parseFloat(cost.getText().toString());
-                    editTransport(typeObject,costObject2);
+                    String typeObject2 = type.getText().toString();
+                    String descriptionObject2 = description.getText().toString();
+                    float costObject2 = Float.parseFloat(price.getText().toString());
+                    String imageUrlObject2 = imageUrl.getText().toString();
+                    editCars(idObject,typeObject2,descriptionObject2,costObject2,imageUrlObject2);
                 }
-                Intent intent = new Intent(AddEditTransport.this, ManageTransport.class);
+                Intent intent = new Intent(AddEditCars.this, ManageCars.class);
                 startActivity(intent);
             }
         });
 
         // Bottom bar
-        if (Menu.manager) {
             ImageView managerIcon = findViewById(R.id.manager_icon);
             managerIcon.setVisibility(View.VISIBLE);
             managerIcon.setOnClickListener(e -> {
@@ -65,7 +75,6 @@ public class AddEditTransport extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             });
-        }
 
         ImageView homeIcon = findViewById(R.id.home_icon);
         homeIcon.setOnClickListener(e -> {
@@ -90,8 +99,8 @@ public class AddEditTransport extends AppCompatActivity {
 
     }
 
-    private void addTransport(String type, float cost){
-        String url = "http://10.0.2.2/android/add_transport.php";
+    private void addCars(String type, String descriptionObject2,float costObject2,String imageUrlObject2){
+        String url = "http://10.0.2.2/android/add_cars.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -126,7 +135,9 @@ public class AddEditTransport extends AppCompatActivity {
                 // on below line we are passing our
                 // key and value pair to our parameters.
                 params.put("type", type);
-                params.put("cost", String.valueOf(cost));
+                params.put("description", descriptionObject2);
+                params.put("price", String.valueOf(costObject2));
+                params.put("image_url", imageUrlObject2);
 
                 // at last we are returning our params.
                 return params;
@@ -135,8 +146,8 @@ public class AddEditTransport extends AppCompatActivity {
         queue.add(request);
     }
 
-    private void editTransport(String type, float cost){
-        String url = "http://10.0.2.2/android/edit_transport.php";
+    private void editCars(int id,String type, String descriptionObject2,float costObject2,String imageUrlObject2){
+        String url = "http://10.0.2.2/android/edit_cars.php";
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -170,8 +181,11 @@ public class AddEditTransport extends AppCompatActivity {
 
                 // on below line we are passing our
                 // key and value pair to our parameters.
+                params.put("id", String.valueOf(id));
                 params.put("type", type);
-                params.put("cost", String.valueOf(cost));
+                params.put("description", descriptionObject2);
+                params.put("price", String.valueOf(costObject2));
+                params.put("image_url", imageUrlObject2);
 
                 // at last we are returning our params.
                 return params;

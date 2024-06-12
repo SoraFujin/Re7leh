@@ -42,7 +42,7 @@
             android:name=".ManageRestaurants"
             android:exported="false" />
         <activity
-            android:name=".ManageTransport"
+            android:name=".ManageCars"
             android:exported="false" />
         <activity
             android:name=".ManageTour"
@@ -51,7 +51,7 @@
             android:name=".AddEditHR"
             android:exported="false" />
         <activity
-            android:name=".AddEditTransport"
+            android:name=".AddEditCars"
             android:exported="false" />
         <activity
             android:name=".AddEditTour"

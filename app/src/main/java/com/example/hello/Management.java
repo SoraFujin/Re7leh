@@ -3,14 +3,8 @@ package com.example.hello;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -99,7 +93,7 @@ public class Management extends AppCompatActivity {
         transport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Management.this, ManageTransport.class);
+                Intent intent = new Intent(Management.this, ManageCars.class);
                 startActivity(intent);
             }
         });

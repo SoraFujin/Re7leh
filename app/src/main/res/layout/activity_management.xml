@@ -146,7 +146,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/main_color"
                 android:gravity="center"
-                android:text="Transport"/>
+                android:text="Cars"/>
 
             <ImageView
                 android:id="@+id/menu_option_icon4"
