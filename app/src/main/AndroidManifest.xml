@@ -82,10 +82,13 @@
             android:exported="false" />
         <activity
             android:name=".RestaurantBooking"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".CarBooking"
-            android:exported="true" />
+            android:exported="false" />
+        <activity
+            android:name=".ReminderActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -55,7 +55,6 @@ public class PlanTrip extends AppCompatActivity {
 
                 SharedPreferences pref2 = getSharedPreferences("MyFavorites", MODE_PRIVATE);
                 int userID = pref2.getInt("id", 0);
-                Log.d("NIGROS2", String.valueOf(userID));
 
                 String cityName = prefs.getString("selectedCityName", "");
                 int cityID = prefs.getInt("cityID", 0);

@@ -154,7 +154,7 @@ public class Menu extends AppCompatActivity {
 
         Intent exintent = getIntent();
         int idUser = exintent.getIntExtra("id", 0);
-        Log.d("NIGROS", String.valueOf(idUser));
+        Log.d("NIGGER", idUser + "");
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("id", idUser);
         editor.apply();
@@ -164,6 +164,10 @@ public class Menu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Menu.this, ProfileActivity.class);
                 intent.putExtra("id", idUser);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("id", idUser);
+                editor.apply();
+                int userid = sharedPreferences.getInt("id",0);
                 startActivity(intent);
                 finish();
             }
