@@ -1,13 +1,13 @@
 package com.example.hello;
 
-public class Car {
+public class Room {
     private int id;
     private String type;
     private String description;
     private double price;
     private String imageUrl;
 
-    public Car(int id, String type, String description, double price, String imageUrl) {
+    public Room(int id, String type, String description, double price, String imageUrl) {
         this.id = id;
         this.type = type;
         this.description = description;

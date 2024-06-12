@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/main_color">
+    android:background="@color/new_gray">
 
     <!-- Main Text -->
     <TextView
@@ -15,8 +15,9 @@
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:textSize="20sp"
+        android:fontFamily="@font/poppins_bold"
         android:textStyle="bold"
-        android:textColor="@color/orange"
+        android:textColor="@color/white"
         android:text="Which type of item would you like to Add, Edit or Remove."
         android:textAlignment="center" />
 
@@ -35,17 +36,20 @@
         <LinearLayout android:id="@+id/menu_option_layout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@color/pink">
+            android:background="@drawable/rounded_item">
 
 
             <TextView
                 android:id="@+id/menu_option_title1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="26dp"
+                android:textSize="18sp"
                 android:gravity="center"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/main_color"
                 android:text="Tour"/>
 
             <ImageView
@@ -53,9 +57,9 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginVertical="20dp"
-                android:layout_marginHorizontal="40dp"
+                android:layout_marginHorizontal="30dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/tour_png"
+                android:src="@drawable/blue_tour_icon"
                 android:adjustViewBounds="true" />
 
         </LinearLayout>
@@ -66,14 +70,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@color/pink">
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_item">
 
 
             <TextView
                 android:id="@+id/menu_option_title2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="26dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/main_color"
                 android:gravity="center"
                 android:text="Hotel"/>
 
@@ -82,9 +89,9 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginVertical="20dp"
-                android:layout_marginHorizontal="40dp"
+                android:layout_marginHorizontal="30dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/hotel_png"
+                android:src="@drawable/blue_hotel_icon"
                 android:adjustViewBounds="true" />
 
         </LinearLayout>
@@ -94,15 +101,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_margin="10dp"
             android:gravity="center"
-            android:background="@color/pink">
+            android:background="@drawable/rounded_item">
 
 
             <TextView
                 android:id="@+id/menu_option_title3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="26dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/main_color"
                 android:gravity="center"
                 android:text="Restaurants"/>
 
@@ -111,9 +121,9 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginVertical="20dp"
-                android:layout_marginHorizontal="40dp"
+                android:layout_marginHorizontal="30dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/food_png"
+                android:src="@drawable/blue_restaurant_icon"
                 android:adjustViewBounds="true" />
 
         </LinearLayout>
@@ -124,27 +134,70 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@color/pink">
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_item">
 
 
             <TextView
                 android:id="@+id/menu_option_title4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="26dp"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/main_color"
                 android:gravity="center"
-                android:text="Transport"/>
+                android:text="Cars"/>
 
             <ImageView
                 android:id="@+id/menu_option_icon4"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginVertical="20dp"
-                android:layout_marginHorizontal="40dp"
+                android:layout_marginHorizontal="30dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/transport_png"
+                android:src="@drawable/blue_transport_icon"
                 android:adjustViewBounds="true" />
 
         </LinearLayout>
     </GridLayout>
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/new_gray"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/home_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/home_unfilled_icon"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/favorites_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/blue_heart_unfilled_icon"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/notification_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/notification_unfilled_icon"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/manager_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/manager_icon"
+            android:layout_weight="1"
+            android:visibility="gone"/>
+    </LinearLayout>
 </RelativeLayout>

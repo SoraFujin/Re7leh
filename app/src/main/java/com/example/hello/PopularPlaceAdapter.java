@@ -1,6 +1,5 @@
 package com.example.hello;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.hello.PopularPlace;
 
 import java.util.List;
 
@@ -35,7 +35,6 @@ public class PopularPlaceAdapter extends RecyclerView.Adapter<PopularPlaceAdapte
     public void onBindViewHolder(@NonNull PopularPlaceViewHolder holder, int position) {
         PopularPlace popularPlace = popularPlaces.get(position);
         holder.nameTextView.setText(popularPlace.getName());
-        Log.d("imageNamw",popularPlace.getImage());
         Glide.with(holder.imageView.getContext())
                 .load("http://10.0.2.2/" + popularPlace.getImage())
                 .into(holder.imageView);
@@ -73,7 +72,6 @@ public class PopularPlaceAdapter extends RecyclerView.Adapter<PopularPlaceAdapte
         }
     }
 
-    // Interface for favorite icon click listener
     public interface OnFavoriteClickListener {
         void onFavoriteClick(int position);
     }

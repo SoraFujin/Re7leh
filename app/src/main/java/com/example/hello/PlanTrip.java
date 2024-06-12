@@ -3,6 +3,7 @@ package com.example.hello;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,7 +12,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlanTrip extends AppCompatActivity {
     private String selectedCityName;
@@ -41,17 +53,35 @@ public class PlanTrip extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
+                SharedPreferences pref2 = getSharedPreferences("MyFavorites", MODE_PRIVATE);
+                int userID = pref2.getInt("id", 0);
+                Log.d("NIGROS2", String.valueOf(userID));
+
                 String cityName = prefs.getString("selectedCityName", "");
+                int cityID = prefs.getInt("cityID", 0);
+
                 String selectedLandmark = prefs.getString("selectedPlaceName", "");
+                int landmarkID = prefs.getInt("placeID", 0);
+
                 String selectedHotel = prefs.getString("selectedHotelName", "");
+                int hotelID = prefs.getInt("hotelID", 0);
+
+
                 String selectedRestaurant = prefs.getString("selectedRestaurantName", "");
+                int restaurantID = prefs.getInt("restaurantID", 0);
+
                 String selectedTransport = prefs.getString("selectedTransport", "");
+                int carID = prefs.getInt("carID", 0);
+
 
                 if (cityName.isEmpty() || selectedLandmark.isEmpty() || selectedHotel.isEmpty()
                         || selectedRestaurant.isEmpty() || selectedTransport.isEmpty()) {
 
                     Toast.makeText(PlanTrip.this, "Please select all options before submitting", Toast.LENGTH_SHORT).show();
                 }else {
+                    reservationNew(cityName, cityID,selectedLandmark, landmarkID, selectedHotel, hotelID, selectedRestaurant, restaurantID,
+                            selectedTransport, carID, userID);
+
                     Intent intent = new Intent(PlanTrip.this, Menu.class);
                     startActivity(intent);
                     finish();
@@ -107,5 +137,69 @@ public class PlanTrip extends AppCompatActivity {
             }
         });
 
+    }
+    private void reservationNew(String cityName, int cityID, String placeName, int placeID, String hotelName, int hotelID
+            ,String restaurantName, int restaurantID, String carName, int carID, int userID){
+        Log.d("cityName", cityName);
+        Log.d("cityID", String.valueOf(cityID));
+        Log.d("placeName", placeName);
+        Log.d("placeID", String.valueOf(placeID));
+        Log.d("hotelName", hotelName);
+        Log.d("hotelID", String.valueOf(hotelID));
+        Log.d("restaurantName", restaurantName);
+        Log.d("restaurantID", String.valueOf(restaurantID));
+        Log.d("carName", carName);
+        Log.d("carID", String.valueOf(carID));
+        Log.d("userID", String.valueOf(userID));
+        String url = "http://10.0.2.2/android/add_reservation.php";
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+
+        // Create a JsonObjectRequest with POST method
+        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                // as we are passing data in the form of url encoded
+                // so we are passing the content type below
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+
+                // below line we are creating a map for storing
+                // our values in key and value pair.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // on below line we are passing our
+                // key and value pair to our parameters.
+                params.put("city_name", cityName);
+                params.put("city_id", String.valueOf(cityID));
+                params.put("place_name", placeName);
+                params.put("place_id", String.valueOf(placeID));
+                params.put("hotel_name", hotelName);
+                params.put("hotel_id", String.valueOf(hotelID));
+                params.put("resturant_name", restaurantName);
+                params.put("restaurant_id", String.valueOf(restaurantID));
+                params.put("car_name",carName);
+                params.put("car_id", String.valueOf(carID));
+                params.put("user_id", String.valueOf(userID));
+
+                // at last we are returning our params.
+                return params;
+            }
+        };
+        queue.add(request);
     }
 }

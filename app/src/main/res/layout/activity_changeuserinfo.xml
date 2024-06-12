@@ -34,7 +34,8 @@
         <EditText
             android:id="@+id/oldChangeText"
             android:layout_width="match_parent"
-            android:fontFamily="sans-serif-condensed-medium"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Please, enter the old value."
             android:layout_height="wrap_content" />
 
 
@@ -55,7 +56,8 @@
             android:id="@+id/newChangeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-medium" />
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Please, enter new value."/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -124,6 +124,8 @@ public class LandMarkFragment extends Fragment {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             int cityID = jsonObject.getInt("cityID");
+            Log.d("cityIDDD", String.valueOf(cityID));
+
             String cityName = jsonObject.getString("cityName");
             String cityImagePath = jsonObject.getString("cityImagePath");
 
@@ -136,10 +138,10 @@ public class LandMarkFragment extends Fragment {
                 String placeName = landmarkObject.getString("place_name");
                 String imagePath = landmarkObject.getString("image_path");
 
-                landmarks.add(new LandMark(imagePath, placeName));
+                landmarks.add(new LandMark(imagePath, placeName, landmarkID));
             }
 
-            cityList.add(new City(cityImagePath, cityName, landmarks));
+            cityList.add(new City(cityImagePath, cityName, landmarks, cityID));
         }
 
         populateCityScrollView();
@@ -178,7 +180,11 @@ public class LandMarkFragment extends Fragment {
             Glide.with(this).load(landmark.getImageUrl()).into(placeImageView);
             placeTextView.setText(landmark.getName());
 
-            placeView.setOnClickListener(v -> saveSelectedLandmark(landmark));
+            placeView.setOnClickListener(v -> {
+                saveSelectedLandmark(landmark);
+                Toast.makeText(getContext(), "Selected: " + landmark.getName(), Toast.LENGTH_SHORT).show();
+                    }
+            );
             placeContainer.addView(placeView);
         }
     }
@@ -186,12 +192,15 @@ public class LandMarkFragment extends Fragment {
     private void saveSelectedCity(City city) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("selectedCityName", city.getCityName());
+        editor.putInt("cityID", city.getCityID());
         editor.apply();
+
     }
 
     private void saveSelectedLandmark(LandMark landmark) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("selectedPlaceName", landmark.getName());
+        editor.putInt("placeID", landmark.getPlaceID());
         editor.apply();
     }
 }

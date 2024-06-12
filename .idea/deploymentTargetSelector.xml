@@ -5,6 +5,27 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      <SelectionState runConfigName="PlanTrip">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+=======
+      <SelectionState runConfigName="Login">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="Menu">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="Login">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="Management">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+>>>>>>> bugFixes
+>>>>>>> a96a4313128876b2fec3a8c7daf6df6e1bb6e498
     </selectionStates>
   </component>
 </project>

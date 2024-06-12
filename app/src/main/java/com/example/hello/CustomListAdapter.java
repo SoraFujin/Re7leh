@@ -80,10 +80,13 @@ public class CustomListAdapter<T> extends BaseAdapter {
             addTextView(holder.layout, restaurant.getLocaion(), "Location");
             addTextView(holder.layout, String.valueOf(restaurant.getRating()), "Rating");
             addTextView(holder.layout, restaurant.getImageName(), "Image Name");
-        } else if (obj instanceof Transport) {
-            Transport transport = (Transport) obj;
-            addTextView(holder.layout, transport.getType(), "Type");
-            addTextView(holder.layout, String.valueOf(transport.getCostPerKM()), "Cost Per KM");
+        } else if (obj instanceof Car) {
+            Car car = (Car) obj;
+            addTextView(holder.layout, String.valueOf(car.getId()), "id");
+            addTextView(holder.layout, car.getType(), "Type");
+            addTextView(holder.layout, car.getDescription(), "Description");
+            addTextView(holder.layout, String.valueOf(car.getPrice()), "Price");
+            addTextView(holder.layout, car.getImageUrl(), "Image URL");
         }else if (obj instanceof Tours) {
             Tours tours = (Tours) obj;
             addTextView(holder.layout, String.valueOf(tours.getId()), "ID");
@@ -122,13 +125,16 @@ public class CustomListAdapter<T> extends BaseAdapter {
                     intent.putExtra("rating", restaurant.getRating());
                     intent.putExtra("imageName", restaurant.getImageName());
                     context.startActivity(intent);
-                } else if (obj instanceof Transport) {
-                    Transport transport = (Transport) obj;
-                    Intent intent = new Intent(context, AddEditTransport.class);
+                } else if (obj instanceof Car) {
+                    Car car = (Car) obj;
+                    Intent intent = new Intent(context, AddEditCars.class);
                     intent.putExtra("op", 1);
 
-                    intent.putExtra("type", transport.getType());
-                    intent.putExtra("cost", transport.getCostPerKM());
+                    intent.putExtra("id", car.getId());
+                    intent.putExtra("type", car.getType());
+                    intent.putExtra("description", car.getDescription());
+                    intent.putExtra("price", car.getPrice());
+                    intent.putExtra("imageUrl", car.getImageUrl());
                     context.startActivity(intent);
                 }else if (obj instanceof Tours) {
                     Tours tours = (Tours) obj;
@@ -158,9 +164,9 @@ public class CustomListAdapter<T> extends BaseAdapter {
                     Restaurants restaurant = (Restaurants) obj;
                     removeRestaurrants(restaurant.getID());
                     removeItem(position);
-                } else if (obj instanceof Transport) {
-                    Transport transport = (Transport) obj;
-                    removeTransport(transport.getType());
+                } else if (obj instanceof Car) {
+                    Car car = (Car) obj;
+                    removeCars(car.getId());
                     removeItem(position);
                 }else if (obj instanceof Tours) {
                     Tours tours = (Tours) obj;
@@ -275,8 +281,8 @@ public class CustomListAdapter<T> extends BaseAdapter {
         queue.add(request);
     }
 
-    private void removeTransport(String type){
-        String url = "http://10.0.2.2/android/remove_transport.php";
+    private void removeCars(int id){
+        String url = "http://10.0.2.2/android/remove_cars.php";
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -310,7 +316,7 @@ public class CustomListAdapter<T> extends BaseAdapter {
 
                 // on below line we are passing our
                 // key and value pair to our parameters.
-                params.put("type", type);
+                params.put("id", String.valueOf(id));
 
                 // at last we are returning our params.
                 return params;

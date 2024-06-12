@@ -7,130 +7,95 @@
     android:background="@color/new_gray">
 
     <TextView
-        android:id="@+id/tourNameTextView"
+        android:id="@+id/typeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Tour Name"
+        android:text="Type"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:layout_marginTop="30dp"/>
 
     <EditText
-        android:id="@+id/tourNameEditText"
+        android:id="@+id/typeEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tourNameTextView"
+        android:layout_toRightOf="@id/typeTextView"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:textColor="@color/orange"/>
 
     <TextView
-        android:id="@+id/destinationTextView"
+        android:id="@+id/descriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tourNameEditText"
+        android:layout_below="@id/typeEditText"
         android:layout_marginStart="16dp"
-        android:text="Destination"
+        android:text="Price"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:layout_marginTop="30dp"/>
 
     <EditText
-        android:id="@+id/destinationEditText"
+        android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tourNameEditText"
-        android:layout_toRightOf="@id/destinationTextView"
+        android:layout_below="@id/typeEditText"
+        android:layout_toRightOf="@id/descriptionTextView"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:textColor="@color/orange"/>
 
     <TextView
-        android:id="@+id/usersIDTextView"
+        android:id="@+id/priceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/destinationEditText"
+        android:layout_below="@id/descriptionEditText"
         android:layout_marginStart="16dp"
-        android:text="user ID"
+        android:text="Price"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:layout_marginTop="30dp"/>
 
     <EditText
-        android:id="@+id/usersIDEditText"
+        android:id="@+id/priceEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/destinationEditText"
-        android:layout_toRightOf="@id/usersIDTextView"
+        android:layout_below="@id/descriptionEditText"
+        android:layout_toRightOf="@id/priceTextView"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:textColor="@color/orange"/>
 
     <TextView
-        android:id="@+id/hotelsIDTextView"
+        android:id="@+id/imageUrlTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/usersIDEditText"
+        android:layout_below="@id/priceEditText"
         android:layout_marginStart="16dp"
-        android:text="Hotel ID"
+        android:text="Price"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:layout_marginTop="30dp"/>
 
     <EditText
-        android:id="@+id/hotelsIDEditText"
+        android:id="@+id/imageUrlEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/usersIDEditText"
-        android:layout_toRightOf="@id/hotelsIDTextView"
+        android:layout_below="@id/priceEditText"
+        android:layout_toRightOf="@id/imageUrlTextView"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"/>
-
-    <TextView
-        android:id="@+id/restaurantsIDTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/hotelsIDEditText"
-        android:layout_marginStart="16dp"
-        android:text="Restaurant ID"
-        android:fontFamily="@font/poppins_regular"
-        android:textColor="@color/white"
-        android:layout_marginTop="30dp"/>
-
-    <EditText
-        android:id="@+id/restaurantsIDEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/hotelsIDEditText"
-        android:layout_toRightOf="@id/restaurantsIDTextView"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"/>
-
-    <TextView
-        android:id="@+id/transportIDTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/restaurantsIDEditText"
-        android:layout_marginStart="16dp"
-        android:text="Transport ID"
-        android:fontFamily="@font/poppins_regular"
-        android:textColor="@color/white"
-        android:layout_marginTop="30dp"/>
-
-    <EditText
-        android:id="@+id/transportIDEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/restaurantsIDEditText"
-        android:layout_toRightOf="@id/transportIDTextView"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:textColor="@color/orange"/>
 
     <Button
         android:id="@+id/executeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/transportIDEditText"
+        android:layout_below="@id/imageUrlEditText"
         android:layout_marginTop="25dp"
         android:text="Execute"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:backgroundTint="@color/main_color" />
 

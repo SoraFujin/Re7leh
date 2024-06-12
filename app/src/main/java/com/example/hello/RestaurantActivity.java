@@ -66,7 +66,7 @@ public class RestaurantActivity extends AppCompatActivity {
    }
 
    public void fetchRestaurant (String location){
-       String url = "http://10.0.2.2/travelapp/get_restaurants.php?location=" + location;
+       String url = "http://10.0.2.2/travelapp/get_restaurantss.php?location=" + location;
        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
            @Override
            public void onResponse(JSONArray response) {
