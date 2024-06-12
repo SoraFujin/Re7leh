@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/black"
+    tools:context=".PlanTrip">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -13,7 +14,6 @@
         android:background="@color/main_color"
         android:orientation="vertical"
         android:padding="10dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
-                app:srcCompat="@drawable/landmark" />
+                android:src="@drawable/landmark" />
 
             <ImageView
                 android:id="@+id/transport_icon"
@@ -51,7 +51,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
-                tools:srcCompat="@drawable/taxi" />
+                android:src="@drawable/taxii" />
 
             <ImageView
                 android:id="@+id/food_icon"
@@ -60,7 +60,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
-                app:srcCompat="@drawable/restaurant" />
+                android:src="@drawable/restaurant" />
 
             <ImageView
                 android:id="@+id/hotel_icon"
@@ -69,7 +69,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
-                app:srcCompat="@drawable/stays" />
+                android:src="@drawable/stays" />
         </LinearLayout>
 
         <LinearLayout
@@ -117,7 +117,6 @@
                 android:text="Stays"
                 android:textColor="@color/black" />
         </LinearLayout>
-
     </LinearLayout>
 
     <Button
@@ -132,7 +131,7 @@
         app:layout_constraintVertical_bias="0.942"
         android:fontFamily="@font/poppins_extrabolditalic"
         android:textColor="@color/black"
-        android:backgroundTint="@color/main_color"/>
+        android:backgroundTint="@color/main_color" />
 
     <LinearLayout
         android:layout_width="409dp"
@@ -149,7 +148,7 @@
             android:name="com.example.hello.LandMarkFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-    </LinearLayout>
 
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

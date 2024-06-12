@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.gson)
     implementation ("androidx.appcompat:appcompat:1.7.0")
     implementation ("com.google.android.material:material:1.5.0")
+    implementation ("androidx.fragment:fragment-ktx:1.4.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

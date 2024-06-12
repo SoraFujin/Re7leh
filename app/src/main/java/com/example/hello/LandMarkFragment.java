@@ -28,18 +28,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LandMarkFragment extends Fragment {
+    private static final String TAG = "LandMarkFragment";
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    private String mParam1;
+    private String mParam2;
     private List<City> cityList;
     private RequestQueue requestQueue;
     private LinearLayout cityContainer;
     private LinearLayout placeContainer;
     private SharedPreferences sharedPreferences;
 
-    private static final String TAG = "LandMarkFragment"; // Tag for logging
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
+    // Update this URL to your actual endpoint
     String url = "http://10.0.2.2/android/cities.php";
 
     public LandMarkFragment() {
@@ -74,16 +75,13 @@ public class LandMarkFragment extends Fragment {
         sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
         Button nextButton = view.findViewById(R.id.Nextbtn);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getParentFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.landMarkfragmentContainer, TransportFragment.class, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("name")
-                        .commit();
-            }
+        nextButton.setOnClickListener(v -> {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.landMarkfragmentContainer, new TransportFragment())
+                    .setReorderingAllowed(true)
+                    .addToBackStack("name")
+                    .commit();
         });
 
         fetchCities();
@@ -91,34 +89,29 @@ public class LandMarkFragment extends Fragment {
     }
 
     private void fetchCities() {
-        Log.d(TAG, "Fetching cities from URL: " + url); // Log URL
+        Log.d(TAG, "Fetching cities from URL: " + url);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
                 null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d(TAG, "Response received: " + response.toString()); // Log response
-                        try {
-                            parseCities(response);
-                        } catch (JSONException e) {
-                            Log.e(TAG, "Error parsing JSON: " + e.getMessage(), e); // Log error
-                            Toast.makeText(getContext(), "Error parsing data", Toast.LENGTH_SHORT).show();
-                        }
+                response -> {
+                    Log.d(TAG, "Response received: " + response.toString());
+                    try {
+                        parseCities(response);
+                    } catch (JSONException e) {
+                        Log.e(TAG, "Error parsing JSON: " + e.getMessage(), e);
+                        Toast.makeText(getContext(), "Error parsing data", Toast.LENGTH_SHORT).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, "Error fetching data: " + error.getMessage(), error); // Log error
-                        Toast.makeText(getContext(), "Error fetching data", Toast.LENGTH_SHORT).show();
-                    }
+                error -> {
+                    Log.e(TAG, "Error fetching data: " + error.getMessage(), error);
+                    Toast.makeText(getContext(), "Error fetching data", Toast.LENGTH_SHORT).show();
                 }
         );
         requestQueue.add(jsonArrayRequest);
     }
+
     private void parseCities(JSONArray jsonArray) throws JSONException {
         cityList = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -181,8 +174,8 @@ public class LandMarkFragment extends Fragment {
             placeView.setOnClickListener(v -> {
                 saveSelectedLandmark(landmark);
                 Toast.makeText(getContext(), "Selected: " + landmark.getName(), Toast.LENGTH_SHORT).show();
-                    }
-            );
+            });
+
             placeContainer.addView(placeView);
         }
     }
@@ -192,7 +185,6 @@ public class LandMarkFragment extends Fragment {
         editor.putString("selectedCityName", city.getCityName());
         editor.putInt("cityID", city.getCityID());
         editor.apply();
-
     }
 
     private void saveSelectedLandmark(LandMark landmark) {
